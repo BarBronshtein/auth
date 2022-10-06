@@ -26,7 +26,8 @@
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
-      <small>{{signup ?'Already a member' :'Dont have an account yet'}}?</small>
+      <small>{{signup ?'Already a member' :'Dont have an account yet'}}? <small class="active">{{signup ?
+      'Register' : 'Login'}}</small></small>
     </div>
   </div>
 </template>

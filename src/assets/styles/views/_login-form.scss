@@ -1,2 +1,13 @@
-.social-icons {
+.social {
+	&-icons {
+		justify-content: space-around;
+	}
+
+	&-btn {
+		color: #828282;
+		border-radius: 50%;
+		border: 1px solid #828282;
+		font-size: 1.15rem;
+		padding: 10px 12px;
+	}
 }
