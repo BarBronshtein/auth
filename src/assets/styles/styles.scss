@@ -1,7 +1,10 @@
+// Setup
+@import 'setup/mixins';
+@import 'setup/typography';
+@import 'setup/functions';
 // Basic
 @import 'basic/base';
 @import 'basic/helpers';
-// Setup
-@import 'setup/typography';
 // Cmps
 // Views
+@import 'views/login-form';

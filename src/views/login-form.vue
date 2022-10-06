@@ -21,7 +21,7 @@
         <button class="action-btn">{{signup ? 'Sign Up' : 'Login'}}</button>
       </form>
       <small>or continue with these social profile</small>
-      <div class="social-icons">
+      <div class="social-icons flex">
         <button class="social-btn" v-for="icon in icons">
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
