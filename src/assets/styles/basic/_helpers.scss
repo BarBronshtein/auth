@@ -1,0 +1,20 @@
+.fa-brands {
+	font-family: fa-brands;
+	font-style: normal;
+}
+.fa-solid {
+	font-family: fa-solid;
+}
+
+.fa-google::before {
+	content: '\f1a0';
+}
+.fa-twitter::before {
+	content: '\f099';
+}
+.fa-facebook::before {
+	content: '\f09a';
+}
+.fa-github::before {
+	content: '\f09b';
+}

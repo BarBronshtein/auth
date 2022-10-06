@@ -1,0 +1,23 @@
+@font-face {
+	font-family: 'fa-brands';
+	src: 
+  // local('font-awesome'),
+		url('/src/assets/fonts/font-awesome/fa-brands-400.ttf');
+}
+
+@font-face {
+	font-family: 'fa-solid';
+	src:
+  //  local('font-awesome'),
+		url('/src/assets/fonts/font-awesome/fa-solid-900.ttf');
+}
+
+@font-face {
+	font-family: 'NotoSans-Bold';
+	src: url('/src/assets/fonts/Noto-Sans/NotoSans-Bold.otf');
+}
+
+@font-face {
+	font-family: 'NotoSans-Regular';
+	src: url('/src/assets/fonts/Noto-Sans/NotoSans-Regular.otf');
+}

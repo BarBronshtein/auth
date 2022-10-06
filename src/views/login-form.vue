@@ -12,18 +12,18 @@
         </div>
         <div class="input-group">
           <i class="icon"></i>
-          <input type="email" placeholder="Email">
+          <input type="password" placeholder="Password">
         </div>
         <div v-if="signup" class="input-group">
           <i class="icon"></i>
-          <input type="password" placeholder="Password">
+          <input type="text" placeholder="Full Name">
         </div>
         <button class="action-btn">{{signup ? 'Sign Up' : 'Login'}}</button>
       </form>
       <small>or continue with these social profile</small>
       <div class="social-icons">
         <button class="social-btn" v-for="icon in icons">
-          <i :class="icon"></i>
+          <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
       <small>{{signup ?'Already a member' :'Dont have an account yet'}}?</small>
