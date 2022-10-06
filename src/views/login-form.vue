@@ -20,14 +20,15 @@
         </div>
         <button class="action-btn">{{signup ? 'Sign Up' : 'Login'}}</button>
       </form>
-      <small>or continue with these social profile</small>
+      <small class="text-center">or continue with these social profile</small>
       <div class="social-icons flex">
         <button class="social-btn" v-for="icon in icons">
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
-      <small>{{signup ?'Already a member' :'Dont have an account yet'}}? <small class="active">{{signup ?
-      'Login' : 'Register'}}</small></small>
+      <small class="text-center">{{signup ?'Already a member' :'Dont have an account yet'}}? <small
+          class="active">{{signup ?
+          'Login' : 'Register'}}</small></small>
     </div>
   </div>
 </template>

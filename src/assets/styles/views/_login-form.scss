@@ -1,13 +1,17 @@
 .login-form {
+	min-height: 100vh;
+	align-items: center;
+	display: flex;
 	margin: auto;
 	padding: 1.25rem;
+	max-width: 375px;
 }
 .form-wrapper {
 	.logo {
 		margin-bottom: 2rem;
 	}
 	.form-header {
-		margin-bottom: 0.875rem;
+		margin-bottom: 2rem;
 	}
 	.input-group {
 		margin-bottom: 0.875rem;
@@ -36,21 +40,36 @@
 			color: #828282;
 		}
 	}
-}
-
-.social {
-	&-icons {
-		justify-content: space-around;
+	.action-btn {
+		border-radius: 0.5rem;
+		width: 100%;
+		background-color: #2f80ed;
+		color: #fff;
+		padding: 0.5rem 0;
+		border: none;
+		margin-bottom: 2rem;
 	}
+	.text-center {
+		margin-bottom: rem(22px);
+		text-align: center;
+		display: block;
+	}
+	.social {
+		&-icons {
+			justify-content: space-around;
+			margin-bottom: rem(27px);
+		}
 
-	&-btn {
-		color: #828282;
-		border-radius: 50%;
-		border: 1px solid #828282;
-		font-size: 1.15rem;
-		padding: rem(11px) rem(11px);
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		&-btn {
+			margin-inline-end: rem(21px);
+			color: #828282;
+			border-radius: 50%;
+			border: 1px solid #828282;
+			font-size: 1.15rem;
+			padding: rem(11px) rem(11px);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 }
