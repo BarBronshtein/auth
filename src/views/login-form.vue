@@ -1,21 +1,21 @@
 <template>
-  <div class="form-container">
-    <div class="form-wrapper modal">
+  <div class="login-form">
+    <div class="form-wrapper">
       <div class="logo">added later...</div>
       <div class="form-header">
-        <h3>Sign up to see photos and videos from your friends.</h3>
+        <h4>Sign up to see photos and videos from your friends.</h4>
       </div>
       <form class="form">
         <div class="input-group">
-          <i class="icon"></i>
+          <span class="fa-solid fa-email"></span>
           <input type="email" placeholder="Email">
         </div>
         <div class="input-group">
-          <i class="icon"></i>
+          <span class="fa-solid fa-lock"></span>
           <input type="password" placeholder="Password">
         </div>
         <div v-if="signup" class="input-group">
-          <i class="icon"></i>
+          <span class="fa-solid fa-user"></span>
           <input type="text" placeholder="Full Name">
         </div>
         <button class="action-btn">{{signup ? 'Sign Up' : 'Login'}}</button>
@@ -27,7 +27,7 @@
         </button>
       </div>
       <small>{{signup ?'Already a member' :'Dont have an account yet'}}? <small class="active">{{signup ?
-      'Register' : 'Login'}}</small></small>
+      'Login' : 'Register'}}</small></small>
     </div>
   </div>
 </template>

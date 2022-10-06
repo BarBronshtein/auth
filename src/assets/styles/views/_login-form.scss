@@ -1,3 +1,43 @@
+.login-form {
+	margin: auto;
+	padding: 1.25rem;
+}
+.form-wrapper {
+	.logo {
+		margin-bottom: 2rem;
+	}
+	.form-header {
+		margin-bottom: 0.875rem;
+	}
+	.input-group {
+		margin-bottom: 0.875rem;
+		position: relative;
+
+		& input {
+			width: 100%;
+			padding: 0.85rem 2.5rem;
+			outline: none;
+			font-size: 1rem;
+			border: 1px solid #bdbdbd;
+			border-radius: 0.5rem;
+			&:focus {
+				border-color: #2f80ed;
+				outline: 1px solid #2f80ed;
+			}
+			&::placeholder {
+				color: #828282;
+			}
+		}
+		& span {
+			position: absolute;
+			top: 1rem;
+			left: 1rem;
+			font-size: 1.1rem;
+			color: #828282;
+		}
+	}
+}
+
 .social {
 	&-icons {
 		justify-content: space-around;
@@ -8,6 +48,9 @@
 		border-radius: 50%;
 		border: 1px solid #828282;
 		font-size: 1.15rem;
-		padding: 10px 12px;
+		padding: rem(11px) rem(11px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }

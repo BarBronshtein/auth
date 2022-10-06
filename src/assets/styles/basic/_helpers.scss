@@ -102,6 +102,16 @@
 	content: '\f09b';
 }
 
+.fa-lock::before {
+	content: '\f023';
+}
+
+.fa-email::before {
+	content: '\f0e0';
+}
+.fa-user::before {
+	content: '\f007';
+}
 .active {
 	color: #2d9cdb;
 }
