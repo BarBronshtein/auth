@@ -2,17 +2,21 @@
 	min-height: 100vh;
 	align-items: center;
 	display: flex;
+	max-width: 475px;
+	justify-content: center;
 	margin: auto;
-	padding: 1.25rem;
-	max-width: 375px;
 }
 .form-wrapper {
 	.logo {
 		margin-bottom: 2rem;
 	}
 	.form-header {
+		h2 {
+			margin-bottom: 2rem;
+		}
 		margin-bottom: 2rem;
 	}
+
 	.input-group {
 		margin-bottom: 0.875rem;
 		position: relative;
@@ -50,6 +54,7 @@
 		margin-bottom: 2rem;
 	}
 	.text-center {
+		font-size: 1rem;
 		margin-bottom: rem(22px);
 		text-align: center;
 		display: block;
@@ -71,5 +76,13 @@
 			align-items: center;
 			justify-content: center;
 		}
+	}
+}
+
+@media screen and (min-width: 550px) {
+	.form-wrapper {
+		border-radius: 1.5rem;
+		border: 1px solid #bdbdbd;
+		padding: 2rem;
 	}
 }

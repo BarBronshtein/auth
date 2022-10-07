@@ -1,8 +1,10 @@
 <template>
   <div class="login-form">
     <div class="form-wrapper">
-      <div class="logo">added later...</div>
+      <div class="logo"><img
+          src="	https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png" alt=""></div>
       <div class="form-header">
+        <h2>Filler header to fill space</h2>
         <h4>Sign up to see photos and videos from your friends.</h4>
       </div>
       <form class="form">
