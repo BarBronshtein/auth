@@ -20,7 +20,13 @@
 	.input-group {
 		margin-bottom: 0.875rem;
 		position: relative;
-
+		.signup &::before {
+			content: '*';
+			position: absolute;
+			left: -1rem;
+			color: red;
+			top: 1rem;
+		}
 		& input {
 			width: 100%;
 			padding: 0.85rem 2.5rem;
@@ -49,7 +55,7 @@
 		width: 100%;
 		background-color: #2f80ed;
 		color: #fff;
-		padding: 0.5rem 0;
+		padding: 0.75rem 0;
 		border: none;
 		margin-bottom: 2rem;
 	}
@@ -61,7 +67,8 @@
 	}
 	.social {
 		&-icons {
-			justify-content: space-around;
+			justify-content: center;
+			align-items: center;
 			margin-bottom: rem(27px);
 		}
 
@@ -75,6 +82,9 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			&:last-child {
+				margin-inline-end: 0;
+			}
 		}
 	}
 }
@@ -82,7 +92,7 @@
 @media screen and (min-width: 550px) {
 	.form-wrapper {
 		border-radius: 1.5rem;
-		border: 1px solid #bdbdbd;
+		outline: 1px solid #bdbdbd;
 		padding: 2rem;
 	}
 }

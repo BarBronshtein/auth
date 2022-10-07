@@ -114,4 +114,14 @@
 }
 .active {
 	color: #2d9cdb;
+	cursor: pointer;
+}
+
+.correct {
+	border-color: #0dcb78 !important;
+	outline: 1px solid #0dcb78 !important;
+}
+.incorrect {
+	border-color: #ff206e !important;
+	outline: 1px solid #ff206e !important;
 }
