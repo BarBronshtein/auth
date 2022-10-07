@@ -1,3 +1,4 @@
+import type { User } from './../stores/user';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export const authService = {
@@ -6,7 +7,7 @@ export const authService = {
 	logout,
 	getLoggedinUser,
 };
-type User = { email: string; password: string; fullname: string };
+
 const API = '//localhost:3030/api/auth/';
 const STORAGE_KEY = 'loggedinUser';
 
