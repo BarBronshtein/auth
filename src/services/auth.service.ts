@@ -9,8 +9,8 @@ export const authService = {
 };
 
 const API = '//localhost:3030/api/auth/';
-const STORAGE_KEY = 'loggedinUser';
-
+const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser';
+const STORAGE_KEY_USERS = 'userDB';
 async function login(credentials: { password: string; email: string }) {
 	try {
 		const res = await axios.post(API + 'login', credentials);
@@ -34,20 +34,19 @@ async function signup(signUpInfo: User) {
 async function logout() {
 	try {
 		await axios.post(API + 'logout');
-		sessionStorage.removeItem(STORAGE_KEY);
+		sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER);
 	} catch (err) {
 		throw new Error('Failed to logout try again later');
 	}
 }
 
 function getLoggedinUser() {
-	return (
-		sessionStorage.getItem(STORAGE_KEY) && // incase nothing inside loggedinUser
-		JSON.parse(sessionStorage.getItem(STORAGE_KEY) as string)
-	);
+	return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER) as string);
 }
 
 function _saveToSession(user: User) {
-	sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user));
 	return user;
 }
+
+function isEmailOccupied(email: string) {}
