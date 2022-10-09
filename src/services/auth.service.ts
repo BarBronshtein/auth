@@ -1,11 +1,13 @@
 import type { User } from './../stores/user';
 import axios from 'axios';
+import { binarySearch } from './util.service';
 axios.defaults.withCredentials = true;
 export const authService = {
 	login,
 	signup,
 	logout,
 	getLoggedinUser,
+	findEmail,
 };
 
 const API = '//localhost:3030/api/auth/';
@@ -48,7 +50,7 @@ function _saveToSession(user: User) {
 	return user;
 }
 
-function findEmail(users: User[], email: string) {
+export function findEmail(users: User[], email: string) {
 	const comprator = (a: string, b: User) => {
 		if (a === b.email) return 1;
 		if (a < b.email) return -1;
