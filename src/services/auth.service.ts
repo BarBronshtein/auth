@@ -1,7 +1,8 @@
 import type { User } from './../stores/user';
-import axios from 'axios';
+import { userService } from './user.service';
+// import axios from 'axios';
 import { binarySearch } from './util.service';
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 export const authService = {
 	login,
 	signup,
@@ -10,12 +11,14 @@ export const authService = {
 	findEmail,
 };
 
-const API = '//localhost:3030/api/auth/';
+// const API = '//localhost:3030/api/auth/';
 const STORAGE_KEY = 'loggedinUser';
 async function login(credentials: { password: string; email: string }) {
 	try {
-		const res = await axios.post(API + 'login', credentials);
-		return _saveToSession(res.data);
+		// const res = await axios.post(API + 'login', credentials);
+		const res = await authenticate(credentials);
+		// return _saveToSession(res.data);
+		return _saveToSession(res);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to login try again later');
@@ -24,8 +27,10 @@ async function login(credentials: { password: string; email: string }) {
 
 async function signup(signUpInfo: User) {
 	try {
-		const res = await axios.post(API + 'signup', signUpInfo);
-		return _saveToSession(res.data);
+		// const res = await axios.post(API + 'signup', signUpInfo);
+		const res = await userService.addUser(signUpInfo);
+		// return _saveToSession(res.data);
+		return _saveToSession(res as User);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to signup try again later');
@@ -34,7 +39,7 @@ async function signup(signUpInfo: User) {
 
 async function logout() {
 	try {
-		await axios.post(API + 'logout');
+		// await axios.post(API + 'logout');
 		sessionStorage.removeItem(STORAGE_KEY);
 	} catch (err) {
 		throw new Error('Failed to logout try again later');
@@ -55,5 +60,15 @@ export function findEmail(users: User[], email: string) {
 		if (a === b.email) return 1;
 		if (a < b.email) return -1;
 	};
-	binarySearch(users, email, comprator);
+	return binarySearch(users, email, comprator);
+}
+
+async function authenticate(credentials: { password: string; email: string }) {
+	try {
+		const user = await userService.getUserByEmail(credentials.email);
+		if (user.password === credentials.password) return user;
+	} catch (err) {
+		console.log(err);
+		throw new Error('Something went wrong please try again later');
+	}
 }

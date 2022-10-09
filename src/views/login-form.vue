@@ -11,6 +11,7 @@
       <form class="form" @submit.prevent="formSubmit">
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
+          <h4 v-if="userMsg">{{userMsg}}</h4>
           <input @blur="validateForm" ref="email" v-model="credentials.email" type="email" placeholder="Email" required
             :pattern="emailValidation" />
         </div>
@@ -33,7 +34,7 @@
         </button>
       </div>
       <small class="text-center">{{ signup ? "Already a member" : "Dont have an account yet" }}?
-        <small class="active" @click="signup = !signup">{{
+        <small class="active" @click="signup = !signup;resetFields()">{{
         signup ? "Login" : "Register"
         }}</small></small>
     </div>
@@ -42,6 +43,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { userService } from '@/services/user.service'
 export default defineComponent({
   name: "login-form",
   components: {},
@@ -50,23 +52,24 @@ export default defineComponent({
       signup: false,
       icons: ["google", "facebook", "twitter", "github"],
       credentials: { email: "", password: "", fullname: "" },
+      userMsg: ''
     };
   },
   methods: {
     validateForm() {
-      if (!this.signup) return;
+      if (!this.signup) return this.resetFields();
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
       const elName = this.$refs.fullname as HTMLInputElement;
-      if (this.credentials.password.length < 6) {
-        elPass.classList.add("incorrect");
-        elPass.classList.remove("correct");
-      }
-      else {
+      if (elPass.checkValidity()) {
         elPass.classList.add("correct");
         elPass.classList.remove("incorrect");
       }
-      if (this.credentials.email.toLowerCase().match(new RegExp(this.emailValidation))) {
+      else {
+        elPass.classList.add("incorrect");
+        elPass.classList.remove("correct");
+      }
+      if (elEmail.checkValidity() && this.isEmailOccupied) {
 
         elEmail.classList.add("correct");
         elEmail.classList.remove("incorrect");
@@ -75,7 +78,7 @@ export default defineComponent({
         elEmail.classList.add("incorrect");
         elEmail.classList.remove("correct");
       }
-      if (this.credentials.fullname) {
+      if (elName.value) {
         elName.classList.add("correct")
         elName.classList.remove("incorrect");
       }
@@ -85,10 +88,25 @@ export default defineComponent({
       }
     },
     formSubmit() {
-      this.signup;
+      if (this.signup && this.isEmailOccupied) {
+        const elEmail = this.$refs.email as HTMLInputElement;
+        elEmail.classList.remove('correct');
+        elEmail.classList.add('incorrect');
+      }
+
+    },
+    resetFields() {
+      const elPass = this.$refs.password as HTMLInputElement;
+      const elEmail = this.$refs.email as HTMLInputElement;
+      elPass.value = elEmail.value = '';
+      elPass.classList.remove('correct', 'incorrect');
+      elEmail.classList.remove('correct', 'incorrect');
     },
   },
   computed: {
+    isEmailOccupied() {
+      return !!userService.getUserByEmail(this.credentials.email);
+    },
     emailValidation() {
       return `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$`;
     },

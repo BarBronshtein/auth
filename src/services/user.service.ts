@@ -1,8 +1,11 @@
 import type { User } from '@/stores/user';
-import { storageService } from './async-storage.service';
+import { storageService, type Entity } from './async-storage.service';
 import { findEmail } from './auth.service';
 export const userService = {
 	getUsers,
+	getUserByEmail,
+	addUser,
+	updateUser,
 };
 const STORAGE_KEY = 'userDB';
 
@@ -15,4 +18,12 @@ async function getUsers(filterBy = null) {
 async function getUserByEmail(email: string) {
 	const users = (await storageService.query(STORAGE_KEY)) as User[];
 	return findEmail(users, email);
+}
+
+async function addUser(user: User) {
+	return await storageService.post(STORAGE_KEY, user as Entity);
+}
+
+async function updateUser(user: User) {
+	return await storageService.put(STORAGE_KEY, user as Entity);
 }

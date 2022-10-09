@@ -7,7 +7,7 @@ export const storageService = {
 	makeId,
 };
 
-interface Entity {
+export interface Entity {
 	id?: string;
 }
 
