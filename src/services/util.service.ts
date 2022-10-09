@@ -76,3 +76,23 @@ function timeAgo(input: Date | string | number) {
 		}
 	}
 }
+
+export function binarySearch(
+	arr: any[],
+	target: string | number,
+	comprator?: Function
+) {
+	if (typeof comprator !== 'function')
+		comprator = (a: string | number, b: string | number) => {
+			if (a === b) return 1;
+			if (a < b) return -1;
+		};
+	let [start, end] = [0, arr.length - 1];
+	while (start <= end) {
+		const mid = Math.trunc((start + end) / 2);
+		const res = comprator(target, arr[mid]);
+		if (res > 0) return arr[mid];
+		if (res < 0) end = mid - 1;
+		else start = mid + 1;
+	}
+}
