@@ -1,3 +1,5 @@
+import { bubbleSort } from './util.service';
+
 export const storageService = {
 	query,
 	get,
@@ -29,18 +31,28 @@ async function get(entityType: string, entityId: string): Promise<Entity> {
 	return entity;
 }
 
-async function post(entityType: string, newEntity: Entity): Promise<Entity> {
+async function post(
+	entityType: string,
+	newEntity: Entity,
+	comprator?: Function
+): Promise<Entity> {
 	newEntity = { ...newEntity, id: makeId() };
 	const entities = await query(entityType);
 	entities.push(newEntity);
+	if (comprator) bubbleSort(entities, comprator);
 	_save(entityType, entities);
 	return newEntity;
 }
 
-async function put(entityType: string, updatedEntity: Entity): Promise<Entity> {
+async function put(
+	entityType: string,
+	updatedEntity: Entity,
+	comprator?: Function
+): Promise<Entity> {
 	const entities = await query(entityType);
 	const idx = entities.findIndex(entity => entity.id === updatedEntity.id);
 	entities[idx] = updatedEntity;
+	if (comprator) bubbleSort(entities, comprator);
 	_save(entityType, entities);
 	return updatedEntity;
 }

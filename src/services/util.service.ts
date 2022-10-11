@@ -114,7 +114,7 @@ export function bubbleSort(arr: any[], comprator?: Function) {
 	return arr;
 }
 
-export function insertionSort(arr: any[], comprator: Function) {
+export function insertionSort(arr: any[], comprator?: Function) {
 	if (typeof comprator !== 'function')
 		comprator = (a: string | number, b: string | number) => (a > b ? 1 : -1);
 	for (let i = 0; i < arr.length; i++) {

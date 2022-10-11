@@ -21,9 +21,17 @@ async function getUserByEmail(email: string) {
 }
 
 async function addUser(user: User) {
-	return await storageService.post(STORAGE_KEY, user as Entity);
+	return await storageService.post(
+		STORAGE_KEY,
+		user as Entity,
+		sortUsersByEmail
+	);
 }
 
 async function updateUser(user: User) {
-	return await storageService.put(STORAGE_KEY, user as Entity);
+	return await storageService.put(STORAGE_KEY, user as Entity, sortUsersByEmail);
+}
+
+function sortUsersByEmail(a: User, b: User) {
+	return a.email > b.email ? 1 : -1;
 }
