@@ -67,8 +67,9 @@ async function authenticate(credentials: { password: string; email: string }) {
 	try {
 		const user = await userService.getUserByEmail(credentials.email);
 		if (user.password === credentials.password) return user;
+		else throw new Error('User password is incorrect');
 	} catch (err) {
 		console.log(err);
-		throw new Error('Something went wrong please try again later');
+		throw err;
 	}
 }

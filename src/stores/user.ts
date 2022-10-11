@@ -6,6 +6,7 @@ export type User = { fullname: string; password: string; email: string };
 export const useUserStore = defineStore('user', {
 	state: () => ({
 		user: null as User | null,
+		users: null! as User[],
 	}),
 	getters: {},
 	actions: {

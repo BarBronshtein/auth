@@ -5,15 +5,14 @@
         <img src="	https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png" alt="" />
       </div>
       <div class="form-header">
-        <h2>Filler header to fill space</h2>
-        <h4>Sign up to see photos and videos from your friends.</h4>
+        <h2>Sign up to see photos and videos from your friends.</h2>
       </div>
       <form class="form" @submit.prevent="formSubmit">
+        <h4 v-if="userMsg">{{userMsg}}</h4>
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
-          <h4 v-if="userMsg">{{userMsg}}</h4>
-          <input @blur="validateForm" ref="email" v-model="credentials.email" type="email" placeholder="Email" required
-            :pattern="emailValidation" />
+          <input @blur="validateForm();isEmailOccupied()" ref="email" v-model="credentials.email" type="email"
+            placeholder="Email" required :pattern="emailValidation" />
         </div>
         <div class="input-group">
           <span class="fa-solid fa-lock"></span>
@@ -44,6 +43,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { userService } from '@/services/user.service'
+import { useUserStore } from '@/stores/user';
+import { mapState, mapActions } from "pinia";
 export default defineComponent({
   name: "login-form",
   components: {},
@@ -52,46 +53,61 @@ export default defineComponent({
       signup: false,
       icons: ["google", "facebook", "twitter", "github"],
       credentials: { email: "", password: "", fullname: "" },
-      userMsg: ''
+      userMsg: '',
+      isOccupied: !null
     };
   },
   methods: {
+    ...mapActions(useUserStore, { toSignup: 'signup' }),
+    ...mapActions(useUserStore, { toLogin: 'login' }),
+    addClass(el: HTMLInputElement, addClass: string, removeClass: string) {
+      el.classList.add(addClass);
+      el.classList.remove(removeClass);
+    },
     validateForm() {
       if (!this.signup) return this.resetFields();
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
       const elName = this.$refs.fullname as HTMLInputElement;
-      if (elPass.checkValidity()) {
-        elPass.classList.add("correct");
-        elPass.classList.remove("incorrect");
-      }
-      else {
-        elPass.classList.add("incorrect");
-        elPass.classList.remove("correct");
-      }
-      if (elEmail.checkValidity() && this.isEmailOccupied) {
-
-        elEmail.classList.add("correct");
-        elEmail.classList.remove("incorrect");
-      }
-      else {
-        elEmail.classList.add("incorrect");
-        elEmail.classList.remove("correct");
-      }
+      if (elPass.checkValidity()) this.addClass(elPass, 'correct', 'incorrect');
+      else
+        this.addClass(elPass, 'incorrect', 'correct');
+      if (elEmail.checkValidity())
+        this.addClass(elEmail, 'correct', 'incorrect');
+      else
+        this.addClass(elEmail, 'incorrect', 'correct');
       if (elName.value) {
-        elName.classList.add("correct")
-        elName.classList.remove("incorrect");
+        this.addClass(elName, 'correct', 'incorrect');
       }
       else {
-        elName.classList.add("incorrect")
-        elName.classList.remove("correct");
+        this.addClass(elName, 'incorrect', 'correct');
       }
     },
     formSubmit() {
-      if (this.signup && this.isEmailOccupied) {
-        const elEmail = this.$refs.email as HTMLInputElement;
-        elEmail.classList.remove('correct');
-        elEmail.classList.add('incorrect');
+      // Signup
+      if (this.signup) {
+        // If the respond from the server didn't come up yet or came back positive then return
+        if (this.isOccupied || this.isOccupied === false) return;
+        // Call userStore and signup
+        this.toSignup(this.credentials);
+      }
+      // Login
+      this.toLogin(this.credentials);
+    },
+    async isEmailOccupied() {
+      const elEmail = this.$refs.email as HTMLInputElement;
+      if (elEmail.checkValidity()) {
+        this.userMsg = 'Checking if email is occupied'
+        const res = await userService.getUserByEmail(this.credentials.email);
+        this.isOccupied = !!res;
+        if (this.isOccupied) {
+          this.userMsg = 'This email is already occupied please try another email';
+          this.addClass(elEmail, 'incorrect', 'correct');
+        }
+        else {
+          this.userMsg = '✔️';
+          this.addClass(elEmail, 'correct', 'incorrect');
+        }
       }
 
     },
@@ -104,14 +120,10 @@ export default defineComponent({
     },
   },
   computed: {
-    isEmailOccupied() {
-      return !!userService.getUserByEmail(this.credentials.email);
-    },
     emailValidation() {
       return `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$`;
     },
   },
-
 });
 </script>
 
