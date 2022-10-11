@@ -96,3 +96,37 @@ export function binarySearch(
 		else start = mid + 1;
 	}
 }
+
+export function bubbleSort(arr: any[], comprator?: Function) {
+	if (typeof comprator !== 'function')
+		comprator = (a: string | number, b: string | number) => (a > b ? 1 : -1);
+	for (let i = arr.length; i > 0; i--) {
+		let noSwaps = true;
+		for (let j = 0; j < i - 1; j++) {
+			const res = comprator(arr[j], arr[j + 1]);
+			if (res > 0) {
+				swap(arr, j, j + 1);
+				noSwaps = false;
+			}
+		}
+		if (noSwaps) break;
+	}
+	return arr;
+}
+
+export function insertionSort(arr: any[], comprator: Function) {
+	if (typeof comprator !== 'function')
+		comprator = (a: string | number, b: string | number) => (a > b ? 1 : -1);
+	for (let i = 0; i < arr.length; i++) {
+		const cur = arr[i];
+		for (var j = i - 1; j >= 0 && comprator(arr[j], cur) > 0; j--) {
+			arr[j + 1] = arr[j];
+		}
+		arr[j + 1] = cur;
+	}
+	return arr;
+}
+
+function swap(arr: any[], i: number, j: number) {
+	[arr[i], arr[j]] = [arr[j], arr[i]];
+}

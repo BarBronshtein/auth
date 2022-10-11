@@ -65,14 +65,14 @@ export default defineComponent({
       el.classList.remove(removeClass);
     },
     validateForm() {
-      if (!this.signup) return this.resetFields();
+      if (!this.signup) return;
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
       const elName = this.$refs.fullname as HTMLInputElement;
       if (elPass.checkValidity()) this.addClass(elPass, 'correct', 'incorrect');
       else
         this.addClass(elPass, 'incorrect', 'correct');
-      if (elEmail.checkValidity())
+      if (elEmail.checkValidity() && !this.isOccupied)
         this.addClass(elEmail, 'correct', 'incorrect');
       else
         this.addClass(elEmail, 'incorrect', 'correct');
@@ -83,18 +83,20 @@ export default defineComponent({
         this.addClass(elName, 'incorrect', 'correct');
       }
     },
-    formSubmit() {
+    async formSubmit() {
       // Signup
       if (this.signup) {
         // If the respond from the server didn't come up yet or came back positive then return
-        if (this.isOccupied || this.isOccupied === false) return;
+        if (this.isOccupied || this.isOccupied === null) return;
         // Call userStore and signup
-        this.toSignup(this.credentials);
+        await this.toSignup(this.credentials);
       }
+      else await this.toLogin(this.credentials);
+      this.resetFields();
       // Login
-      this.toLogin(this.credentials);
     },
     async isEmailOccupied() {
+      if (!this.signup) return;
       const elEmail = this.$refs.email as HTMLInputElement;
       if (elEmail.checkValidity()) {
         this.userMsg = 'Checking if email is occupied'
@@ -114,7 +116,7 @@ export default defineComponent({
     resetFields() {
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
-      elPass.value = elEmail.value = '';
+      this.credentials.email = this.credentials.password = '';
       elPass.classList.remove('correct', 'incorrect');
       elEmail.classList.remove('correct', 'incorrect');
     },
