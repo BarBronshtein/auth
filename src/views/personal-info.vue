@@ -2,10 +2,9 @@
   <!-- <personalInfoHeader /> -->
   <main class="personal-info">
     <h2>Personal info</h2>
-    <h4>Basic info,your name and photo</h4>
+    <h4>Basic info,like your name and photo</h4>
     <section class="personal-info-wrapper">
-      <div class="left"></div>
-      <div class="right"></div>
+
     </section>
 
   </main>

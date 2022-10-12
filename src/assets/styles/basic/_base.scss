@@ -3,6 +3,18 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+body {
+	font-family: 'NotoSans-Regular';
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'NOtoSans-Bold';
+}
 
 button {
 	cursor: pointer;
