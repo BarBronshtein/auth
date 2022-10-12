@@ -13,7 +13,7 @@
 		font-weight: 500;
 	}
 
-	& span {
+	& span.first {
 		position: absolute;
 		left: 3rem;
 		color: #bdbdbd;
@@ -22,15 +22,14 @@
 		letter-spacing: -0.035em;
 	}
 
-	& img,
-	& p {
+	& .second {
 		margin-left: calc(3rem + rem(190px));
 	}
-	& img {
+	& img.second {
 		width: 72px;
 		object-fit: cover;
 	}
-	& p {
+	& p.second {
 		font-size: 1.125rem;
 		letter-spacing: -0.035em;
 		color: #333;

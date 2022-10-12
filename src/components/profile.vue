@@ -1,14 +1,20 @@
 <template>
   <section class="profile">
-    <profileInfoLabel>
-      <template #first></template>
-      <template #second></template>
+    <profileInfoLabel class="first-label">
+      <template #first>
+        <div>
+          <h3>Profile</h3>
+          <p>Some info may be visible to others</p>
+        </div>
+      </template>
+      <template #second>
+        <button class="btn">Edit</button></template>
     </profileInfoLabel>
     <profileInfoLabel class="border-top" v-for="(el,i) in data" :key="el.first">
-      <template #first><span class="uppercase">{{el.first}}</span></template>
+      <template #first><span class="uppercase first">{{el.first}}</span></template>
       <template #second>
-        <img v-if="!i" :src="el.second">
-        <p v-else>{{el.second}}</p>
+        <img class="second" v-if="!i" :src="el.second">
+        <p class="second" v-else>{{el.second}}</p>
       </template>
     </profileInfoLabel>
   </section>
