@@ -1,11 +1,20 @@
 import { authService } from './../services/auth.service';
 import { defineStore } from 'pinia';
 
-export type User = { fullname: string; password: string; email: string };
+export type User = {
+	fullname: string;
+	password: string;
+	email: string;
+	photo?: string;
+	bio?: string;
+	phone?: string;
+};
 
 export const useUserStore = defineStore('user', {
 	state: () => ({
-		user: null as User | null,
+		user:
+			JSON.parse(sessionStorage.getItem('loggedinUser') as string) ||
+			(null as User | null),
 		users: null! as User[],
 	}),
 	getters: {},

@@ -21,20 +21,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import type { User } from "@/stores/user";
+import { defineComponent, type PropType } from "vue";
 import profileInfoLabel from "./profile-info-label.vue";
 export default defineComponent({
   name: "profile",
   components: { profileInfoLabel },
+  props: {
+    user: { type: Object as PropType<User> }
+  },
   data() {
     return {
       data: [{
-        first: 'photo', second: `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`
+        first: 'photo', second: this.user?.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`
       },
-      { first: 'name', second: 'Test is In Progress' },
-      { first: 'bio', second: '' },
-      { first: 'phone', second: '----------' },
-      { first: 'email', second: 'test@test.test' },
+      { first: 'name', second: this.user?.fullname },
+      { first: 'bio', second: this.user?.bio ?? '' },
+      { first: 'phone', second: this.user?.phone ?? '----------' },
+      { first: 'email', second: this.user?.email ?? '' },
       { first: 'password', second: '******' }
       ],
     };
