@@ -7,8 +7,7 @@
           <p>Some info may be visible to others</p>
         </div>
       </template>
-      <template #second>
-        <button class="btn">Edit</button></template>
+      <template #second><button class="btn">Edit</button></template>
     </profileInfoLabel>
     <profileInfoLabel class="border-top" v-for="(el,i) in data" :key="el.first">
       <template #first><span class="uppercase first">{{el.first}}</span></template>
