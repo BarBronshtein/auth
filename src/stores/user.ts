@@ -24,6 +24,7 @@ export const useUserStore = defineStore('user', {
 				this.setUser(user);
 			} catch (err) {
 				console.log(err);
+				throw new Error('Failed to login incorrect email or password');
 			}
 		},
 		async signup(credentials: User) {
@@ -32,6 +33,7 @@ export const useUserStore = defineStore('user', {
 				this.setUser(user);
 			} catch (err) {
 				console.log(err);
+				throw new Error('Failed to signup please try again later');
 			}
 		},
 		setUser(user: User | null) {

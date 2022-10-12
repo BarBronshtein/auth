@@ -8,11 +8,14 @@
         <h2>Sign up to see photos and videos from your friends.</h2>
       </div>
       <form class="form" @submit.prevent="formSubmit">
-        <h4 v-if="userMsg">{{userMsg}}</h4>
+        <h4 v-if="userMsg">{{ userMsg }}</h4>
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
-          <input @blur="validateForm();isEmailOccupied()" ref="email" v-model="credentials.email" type="email"
-            placeholder="Email" required :pattern="emailValidation" />
+          <input @blur="
+            validateForm();
+            isEmailOccupied();
+          " ref="email" v-model="credentials.email" type="email" placeholder="Email" required
+            :pattern="emailValidation" />
         </div>
         <div class="input-group">
           <span class="fa-solid fa-lock"></span>
@@ -24,6 +27,7 @@
           <input required @blur="validateForm" ref="fullname" v-model="credentials.fullname" type="text"
             placeholder="Full Name" />
         </div>
+        <!-- TODO: Make action-btn a component -->
         <button class="action-btn">{{ signup ? "Sign Up" : "Login" }}</button>
       </form>
       <small class="text-center">or continue with these social profile</small>
@@ -33,18 +37,19 @@
         </button>
       </div>
       <small class="text-center">{{ signup ? "Already a member" : "Dont have an account yet" }}?
-        <small class="active" @click="signup = !signup;resetFields()">{{
-        signup ? "Login" : "Register"
-        }}</small></small>
+        <small class="active" @click="
+          signup = !signup;
+          resetFields();
+        ">{{ signup ? "Login" : "Register" }}</small></small>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { userService } from '@/services/user.service'
-import { useUserStore } from '@/stores/user';
-import { mapState, mapActions } from "pinia";
+import { userService } from "@/services/user.service";
+import { useUserStore } from "@/stores/user";
+import { mapActions } from "pinia";
 export default defineComponent({
   name: "login-form",
   components: {},
@@ -53,13 +58,13 @@ export default defineComponent({
       signup: false,
       icons: ["google", "facebook", "twitter", "github"],
       credentials: { email: "", password: "", fullname: "" },
-      userMsg: '',
-      isOccupied: !null
+      userMsg: "",
+      isOccupied: !null,
     };
   },
   methods: {
-    ...mapActions(useUserStore, { toSignup: 'signup' }),
-    ...mapActions(useUserStore, { toLogin: 'login' }),
+    ...mapActions(useUserStore, { toSignup: "signup" }),
+    ...mapActions(useUserStore, { toLogin: "login" }),
     addClass(el: HTMLInputElement, addClass: string, removeClass: string) {
       el.classList.add(addClass);
       el.classList.remove(removeClass);
@@ -69,56 +74,58 @@ export default defineComponent({
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
       const elName = this.$refs.fullname as HTMLInputElement;
-      if (elPass.checkValidity()) this.addClass(elPass, 'correct', 'incorrect');
-      else
-        this.addClass(elPass, 'incorrect', 'correct');
+      if (elPass.checkValidity()) this.addClass(elPass, "correct", "incorrect");
+      else this.addClass(elPass, "incorrect", "correct");
       if (elEmail.checkValidity() && !this.isOccupied)
-        this.addClass(elEmail, 'correct', 'incorrect');
-      else
-        this.addClass(elEmail, 'incorrect', 'correct');
+        this.addClass(elEmail, "correct", "incorrect");
+      else this.addClass(elEmail, "incorrect", "correct");
       if (elName.value) {
-        this.addClass(elName, 'correct', 'incorrect');
-      }
-      else {
-        this.addClass(elName, 'incorrect', 'correct');
+        this.addClass(elName, "correct", "incorrect");
+      } else {
+        this.addClass(elName, "incorrect", "correct");
       }
     },
     async formSubmit() {
       // Signup
-      if (this.signup) {
-        // If the respond from the server didn't come up yet or came back positive then return
-        if (this.isOccupied || this.isOccupied === null) return;
-        // Call userStore and signup
-        await this.toSignup(this.credentials);
+      try {
+
+        if (this.signup) {
+          // If the respond from the server didn't come up yet or came back positive then return
+          if (this.isOccupied || this.isOccupied === null) return;
+          // Call userStore and signup
+          await this.toSignup(this.credentials);
+        } else await this.toLogin(this.credentials);
+        this.resetFields();
+        this.$router.push('/personal-info')
+      } catch (err) {
+        console.log(err);
+        this.userMsg = err as string;
       }
-      else await this.toLogin(this.credentials);
-      this.resetFields();
       // Login
     },
     async isEmailOccupied() {
       if (!this.signup) return;
       const elEmail = this.$refs.email as HTMLInputElement;
       if (elEmail.checkValidity()) {
-        this.userMsg = 'Checking if email is occupied'
+        this.userMsg = "Checking if email is occupied";
         const res = await userService.getUserByEmail(this.credentials.email);
         this.isOccupied = !!res;
         if (this.isOccupied) {
-          this.userMsg = 'This email is already occupied please try another email';
-          this.addClass(elEmail, 'incorrect', 'correct');
-        }
-        else {
-          this.userMsg = '✔️';
-          this.addClass(elEmail, 'correct', 'incorrect');
+          this.userMsg = "This email is already occupied please try another email";
+          this.addClass(elEmail, "incorrect", "correct");
+        } else {
+          this.userMsg = "✔️";
+          this.addClass(elEmail, "correct", "incorrect");
         }
       }
-
     },
     resetFields() {
+      this.userMsg = "";
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
-      this.credentials.email = this.credentials.password = '';
-      elPass.classList.remove('correct', 'incorrect');
-      elEmail.classList.remove('correct', 'incorrect');
+      this.credentials.email = this.credentials.password = "";
+      elPass.classList.remove("correct", "incorrect");
+      elEmail.classList.remove("correct", "incorrect");
     },
   },
   computed: {
