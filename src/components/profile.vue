@@ -4,10 +4,7 @@
       <template #first></template>
       <template #second></template>
     </profileInfoLabel>
-    <profileInfoLabel v-for="(el,i) in data" :key="el.first">
-      <template #hr>
-        <div class="hr"></div>
-      </template>
+    <profileInfoLabel class="border-top" v-for="(el,i) in data" :key="el.first">
       <template #first><span class="uppercase">{{el.first}}</span></template>
       <template #second>
         <img v-if="!i" :src="el.second">

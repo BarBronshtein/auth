@@ -4,6 +4,11 @@
 	align-items: center;
 	min-height: rem(100px);
 	justify-content: space-between;
+
+	&.border-top {
+		border-top: 1px solid #e3e3e3;
+	}
+
 	& > * {
 		font-weight: 500;
 	}
