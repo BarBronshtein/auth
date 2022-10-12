@@ -1,0 +1,13 @@
+.profile {
+	display: grid;
+	grid-template-columns: 3rem 1fr 3rem;
+	& > * {
+		grid-column: 2;
+	}
+}
+@media screen and (min-height: 860px) {
+	.profile {
+		border: 1px solid #e0e0e0;
+		border-radius: 0.75rem;
+	}
+}

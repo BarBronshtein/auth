@@ -1,10 +1,9 @@
 .profile-info-label {
-	border-top: 1px solid #d3d3d3;
 	display: flex;
 	position: relative;
 	align-items: center;
 	min-height: rem(100px);
-
+	justify-content: space-between;
 	& > * {
 		font-weight: 500;
 	}
