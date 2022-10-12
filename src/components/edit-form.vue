@@ -26,7 +26,7 @@
       <label>Email</label>
       <input type="password" minlength="6" placeholder="Enter your password...">
     </div>
-    <button class="action-btn"></button>
+    <button class="action-btn">Save</button>
   </section>
 </template>
 

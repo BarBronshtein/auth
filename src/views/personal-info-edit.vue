@@ -1,7 +1,7 @@
 <template>
   <router-link to="/personal-info">
     &lt; Back </router-link>
-  <editForm />
+  <editForm :user=userToChange />
 </template>
 
 <script lang="ts">
