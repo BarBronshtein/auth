@@ -1,16 +1,17 @@
 <template>
-  <div>
-
-  </div>
+  <router-link to="/personal-info">
+    &lt; Back </router-link>
+  <editForm />
 </template>
 
 <script lang="ts">
 import { useUserStore } from '@/stores/user';
 import { mapState } from 'pinia';
 import { defineComponent } from 'vue';
+import editForm from '@/components/edit-form.vue'
 export default defineComponent({
   name: 'personal-info-edit',
-  components: {},
+  components: { editForm },
   data() {
     return {}
   },
