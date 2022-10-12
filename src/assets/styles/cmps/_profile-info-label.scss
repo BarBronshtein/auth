@@ -1,0 +1,35 @@
+.profile-info-label {
+	border-top: 1px solid #d3d3d3;
+	display: flex;
+	position: relative;
+	align-items: center;
+	min-height: rem(100px);
+
+	& > * {
+		font-weight: 500;
+	}
+
+	& span {
+		position: absolute;
+		left: 3rem;
+		color: #bdbdbd;
+		font-size: rem(13px);
+		line-height: lh(18px);
+		letter-spacing: -0.035em;
+	}
+
+	& img,
+	& p {
+		margin-left: calc(3rem + rem(190px));
+	}
+	& img {
+		width: 72px;
+		object-fit: cover;
+	}
+	& p {
+		font-size: 1.125rem;
+		letter-spacing: -0.035em;
+		color: #333;
+		line-height: lh(25px);
+	}
+}

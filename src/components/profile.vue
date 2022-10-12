@@ -1,19 +1,19 @@
 <template>
-  <ProfileInfoLabel v-for="(el,i) in data" :key="el.first">
+  <profileInfoLabel v-for="(el,i) in data" :key="el.first">
     <template #first><span class="uppercase">{{el.first}}</span></template>
     <template #second>
-      <img v-if="i===1" :src="el.second">
+      <img v-if="!i" :src="el.second">
       <p v-else>{{el.second}}</p>
     </template>
-  </ProfileInfoLabel>
+  </profileInfoLabel>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import ProfileInfoLabel from "./profile-info-label.vue";
+import profileInfoLabel from "./profile-info-label.vue";
 export default defineComponent({
   name: "profile",
-  components: { ProfileInfoLabel },
+  components: { profileInfoLabel },
   data() {
     return {
       data: [{
