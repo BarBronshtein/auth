@@ -3,17 +3,16 @@
   <main class="personal-info">
     <h2>Personal info</h2>
     <h4>Basic info,like your name and photo</h4>
-    <section class="personal-info-wrapper">
 
-    </section>
 
   </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { Profile } from '@/components/profile.vue'
 export default defineComponent({
-  name: 'App',
+  name: 'personal-info',
   components: {},
   data() {
     return {}

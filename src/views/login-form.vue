@@ -32,7 +32,7 @@
       </form>
       <small class="text-center">or continue with these social profile</small>
       <div class="social-icons flex">
-        <button class="social-btn" v-for="icon in icons">
+        <button class="social-btn" v-for="icon in icons" :key="icon">
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
