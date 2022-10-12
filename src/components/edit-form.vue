@@ -12,7 +12,7 @@
     </div>
     <div class="input-group">
       <label>Bio</label>
-      <input type="text" placeholder="Enter your bio...">
+      <input class="bio" type="text" placeholder="Enter your bio...">
     </div>
     <div class="input-group">
       <label>Phone</label>
@@ -23,7 +23,7 @@
       <input type="email" :pattern="emailValidation" placeholder="Enter your name...">
     </div>
     <div class="input-group">
-      <label>Email</label>
+      <label>Password</label>
       <input type="password" minlength="6" placeholder="Enter your password...">
     </div>
     <button class="action-btn">Save</button>

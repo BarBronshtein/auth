@@ -1,0 +1,47 @@
+.edit-form {
+	font-weight: 500;
+	padding: rem(30px) 3rem;
+	max-width: 860px;
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	margin-bottom: 2.5rem;
+	.input-group {
+		label {
+			font-size: rem(13px);
+			line-height: 1.125rem;
+		}
+		input {
+			width: 100%;
+			padding: rem(17px) rem(18px);
+			border: 1px solid #828282;
+			border-radius: 12px;
+			margin-bottom: rem(46px);
+			&::placeholder {
+				color: #bdbdbd;
+				font-size: rem(13px);
+				line-height: 1.125rem;
+			}
+			&.bio {
+				overflow-y: scroll;
+				height: rem(92px);
+				&::placeholder {
+					position: relative;
+					top: -1rem;
+				}
+			}
+		}
+	}
+	.action-btn {
+		align-self: flex-start;
+		padding: 0.5rem 2rem;
+		font-size: 1rem;
+		line-height: lh(22px);
+	}
+}
+@media screen and (min-width: 860px) {
+	.edit-form {
+		border: 1px solid #e0e0e0;
+		border-radius: 0.75rem;
+	}
+}
