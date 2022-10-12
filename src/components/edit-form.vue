@@ -14,23 +14,23 @@
     </div>
     <div class="input-group">
       <label>Name</label>
-      <input type="text" placeholder="Enter your name...">
+      <input v-model="user.fullname" type="text" placeholder="Enter your name...">
     </div>
     <div class="input-group">
       <label>Bio</label>
-      <input class="bio" type="text" placeholder="Enter your bio...">
+      <input v-model="user.bio" class="bio" type="text" placeholder="Enter your bio...">
     </div>
     <div class="input-group">
       <label>Phone</label>
-      <input type="text" placeholder="Enter your phone...">
+      <input v-model="user.phone" type="text" placeholder="Enter your phone...">
     </div>
     <div class="input-group">
       <label>Email</label>
-      <input type="email" :pattern="emailValidation" placeholder="Enter your name...">
+      <input v-model="user.email" type="email" :pattern="emailValidation" placeholder="Enter your name...">
     </div>
     <div class="input-group">
       <label>Password</label>
-      <input type="password" minlength="6" placeholder="Enter your password...">
+      <input type="password" v-model="user.password" minlength="6" placeholder="Enter your password...">
     </div>
     <button class="action-btn">Save</button>
   </section>

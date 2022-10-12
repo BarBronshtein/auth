@@ -70,6 +70,7 @@
 			color: #4f4f4f;
 			font-size: rem(13px);
 			line-height: 1.125rem;
+			display: block;
 			margin-bottom: 4px;
 		}
 		input {
@@ -78,6 +79,10 @@
 			border: 1px solid #828282;
 			border-radius: 12px;
 			margin-bottom: rem(46px);
+			&:focus {
+				border-color: #2f80ed;
+				outline: 1px solid #2f80ed;
+			}
 			&::placeholder {
 				color: #bdbdbd;
 				font-size: rem(13px);
