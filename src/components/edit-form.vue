@@ -3,7 +3,13 @@
     <h2>Change Info</h2>
     <p>Changes will be reflected every services</p>
     <div class="img-group-input">
-      <input class="img-input" type="file" />
+      <div class="img-container">
+        <input class="img-input" type="file" />
+        <img
+          :src="user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png` "
+          alt="">
+        <div class="overlay"></div>
+      </div>
       <span>Change photo</span>
     </div>
     <div class="input-group">

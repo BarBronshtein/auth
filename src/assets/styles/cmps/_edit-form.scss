@@ -6,10 +6,71 @@
 	flex-direction: column;
 	margin: auto;
 	margin-bottom: 2.5rem;
+
+	h2 {
+		font-size: 1.5rem;
+		line-height: lh(33px);
+		font-weight: 400;
+		margin-bottom: 0.25rem;
+	}
+	p {
+		font-size: rem(13px);
+		color: #828282;
+		line-height: 1.125rem;
+		margin-bottom: rem(26px);
+	}
+	.img-group-input {
+		display: flex;
+		align-items: center;
+		margin-bottom: 2rem;
+		.img-container {
+			position: relative;
+
+			img {
+				width: rem(72px);
+				object-fit: cover;
+				border-radius: 0.5rem;
+			}
+			.overlay {
+				inset: 0;
+				border-radius: 0.5rem;
+				width: 100%;
+				height: 94%;
+				background: rgba(0, 0, 0, 0.2);
+				position: absolute;
+				&::after {
+					font-family: 'fa-solid';
+					content: '\f030';
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					color: #fff;
+				}
+			}
+			input {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				z-index: 10;
+				opacity: 0;
+				cursor: pointer;
+			}
+		}
+
+		span {
+			font-size: rem(13px);
+			color: #828282;
+			line-height: 1.125rem;
+			margin-inline-start: rem(28px);
+		}
+	}
 	.input-group {
 		label {
+			color: #4f4f4f;
 			font-size: rem(13px);
 			line-height: 1.125rem;
+			margin-bottom: 4px;
 		}
 		input {
 			width: 100%;
@@ -37,6 +98,7 @@
 		padding: 0.5rem 2rem;
 		font-size: 1rem;
 		line-height: lh(22px);
+		margin-bottom: 3rem;
 	}
 }
 @media screen and (min-width: 860px) {
