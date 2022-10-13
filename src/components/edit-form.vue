@@ -18,7 +18,9 @@
     </div>
     <div class="input-group">
       <label>Bio</label>
-      <input v-model="user.bio" class="bio" type="text" placeholder="Enter your bio...">
+      <textarea name="bio" class="bio" cols="30" rows="10" v-model="user.bio"
+        placeholder="Enter your bio..."></textarea>
+      <!-- <input v-model="user.bio" class="bio" type="text" placeholder="Enter your bio..."> -->
     </div>
     <div class="input-group">
       <label>Phone</label>
