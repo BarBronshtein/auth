@@ -63,7 +63,7 @@ export default defineComponent({
       icons: ["google", "facebook", "twitter", "github"],
       credentials: { email: "", password: "", fullname: "" },
       userMsg: "",
-      isOccupied: !null,
+      isOccupied: true,
     };
   },
   methods: {
@@ -95,7 +95,7 @@ export default defineComponent({
 
         if (this.signup) {
           // If the respond from the server didn't come up yet or came back positive then return
-          if (this.isOccupied || this.isOccupied === null) return;
+          if (this.isOccupied) return;
           // Call userStore and signup
           await this.toSignup(this.credentials);
         } else await this.toLogin(this.credentials);

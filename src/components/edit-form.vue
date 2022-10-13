@@ -14,7 +14,7 @@
     </div>
     <div class="input-group">
       <label>Name</label>
-      <input v-model="user.fullname" type="text" placeholder="Enter your name...">
+      <input ref="fullname" v-model="user.fullname" type="text" placeholder="Enter your name..." required>
     </div>
     <div class="input-group">
       <label>Bio</label>
@@ -28,17 +28,20 @@
     </div>
     <div class="input-group">
       <label>Email</label>
-      <input v-model="user.email" type="email" :pattern="emailValidation" placeholder="Enter your name...">
+      <input ref="email" v-model="user.email" type="email" :pattern="emailValidation" placeholder="Enter your name..."
+        required>
     </div>
     <div class="input-group">
       <label>Password</label>
-      <input type="password" v-model="user.password" minlength="6" placeholder="Enter your password...">
+      <input ref="password" type="password" v-model="user.password" minlength="6" placeholder="Enter your password..."
+        required>
     </div>
     <button class="action-btn">Save</button>
   </form>
 </template>
 
 <script lang="ts">
+import { userService } from '@/services/user.service';
 import type { User } from '@/stores/user';
 import { defineComponent, type PropType } from 'vue';
 export default defineComponent({
@@ -46,13 +49,39 @@ export default defineComponent({
   props: {
     user: {
       type: Object as PropType<User>
-    }
+    }, originalEmail: String
   },
   data() {
     return {
+      isOccupied: false,
+      userMsg: '',
     }
   },
-  methods: {},
+  methods: {
+    addClass(el: HTMLInputElement, addClass: string, removeClass: string) {
+      el.classList.add(addClass);
+      el.classList.remove(removeClass);
+    },
+    async isEmailOccupied() {
+      if (!this.user) return;
+      if (this.user.email === this.originalEmail) return;
+      // Convert isOccupied to true until server respond comes back
+      this.isOccupied = true;
+      const elEmail = this.$refs.email as HTMLInputElement;
+      if (elEmail.checkValidity()) {
+        this.userMsg = "Checking if email is occupied";
+        const res = await userService.getUserByEmail(this.user.email);
+        this.isOccupied = !!res;
+        if (this.isOccupied) {
+          this.userMsg = "This email is already occupied please try another email";
+          this.addClass(elEmail, "incorrect", "correct");
+        } else {
+          this.userMsg = "✔️";
+          this.addClass(elEmail, "correct", "incorrect");
+        }
+      }
+    },
+  },
   computed: {
     emailValidation() {
       return `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$`;
