@@ -44,11 +44,7 @@ async function post(
 	if (!comprator)
 		comprator = (a: EntityWithId, b: EntityWithId) => (a.id > b.id ? 1 : -1);
 	bubbleSort(entities, comprator);
-	// if (comprator) bubbleSort(entities, comprator);
-	// else
-	// 	bubbleSort(entities, (a: EntityWithId, b: EntityWithId) =>
-	// 		a.id > b.id ? 1 : -1
-	// 	);
+
 	_save(entityType, entities);
 	return newEntity;
 }
@@ -56,29 +52,25 @@ async function post(
 async function put(
 	entityType: string,
 	updatedEntity: Entity,
-	comprator?: Function
+	comprator?: Function,
+	searchFunction?: Function
 ): Promise<Entity> {
 	const entities = await query(entityType);
-	// const idx = entities.findIndex(entity => entity.id === updatedEntity.id);
-	const idx = binarySearch(
-		entities,
-		updatedEntity.id as string,
-		(a: string, b: EntityWithId) => {
+	if (!searchFunction)
+		searchFunction = (a: string, b: EntityWithId) => {
 			if (a === b.id) return 1;
 			if (a < b.id) return -1;
-		}
-	);
+		};
+
+	const idx = binarySearch(entities, updatedEntity.id as string, searchFunction);
+
 	entities[idx] = updatedEntity;
 
 	if (!comprator)
 		comprator = (a: EntityWithId, b: EntityWithId) => (a.id > b.id ? 1 : -1);
 
 	bubbleSort(entities, comprator);
-	// if (comprator) bubbleSort(entities, comprator);
-	// else
-	// 	bubbleSort(entities, (a: EntityWithId, b: EntityWithId) =>
-	// 		a.id > b.id ? 1 : -1
-	// 	);
+
 	_save(entityType, entities);
 	return updatedEntity;
 }
