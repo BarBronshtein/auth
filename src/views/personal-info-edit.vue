@@ -1,7 +1,10 @@
 <template>
-  <router-link to="/personal-info">
-    &lt; Back </router-link>
-  <editForm :user=userToChange />
+  <main class="personal-info-edit">
+    <router-link to="/personal-info">
+      <span class="fa-solid fa-al"></span> Back
+    </router-link>
+    <editForm :user=userToChange />
+  </main>
 </template>
 
 <script lang="ts">

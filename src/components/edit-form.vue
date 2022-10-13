@@ -1,5 +1,5 @@
 <template>
-  <section v-if="user" class="edit-form">
+  <form v-if="user" class="edit-form">
     <h2>Change Info</h2>
     <p>Changes will be reflected every services</p>
     <div class="img-group-input">
@@ -33,7 +33,7 @@
       <input type="password" v-model="user.password" minlength="6" placeholder="Enter your password...">
     </div>
     <button class="action-btn">Save</button>
-  </section>
+  </form>
 </template>
 
 <script lang="ts">

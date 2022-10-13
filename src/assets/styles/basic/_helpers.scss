@@ -112,6 +112,11 @@
 .fa-user::before {
 	content: '\f007';
 }
+
+.fa-al::before {
+	content: '\f104';
+}
+
 .active {
 	color: #2d9cdb;
 	cursor: pointer;
