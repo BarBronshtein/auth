@@ -41,11 +41,14 @@ async function post(
 	newEntity = { ...newEntity, id: makeId() };
 	const entities = await query(entityType);
 	entities.push(newEntity);
-	if (comprator) bubbleSort(entities, comprator);
-	else
-		bubbleSort(entities, (a: EntityWithId, b: EntityWithId) =>
-			a.id > b.id ? 1 : -1
-		);
+	if (!comprator)
+		comprator = (a: EntityWithId, b: EntityWithId) => (a.id > b.id ? 1 : -1);
+	bubbleSort(entities, comprator);
+	// if (comprator) bubbleSort(entities, comprator);
+	// else
+	// 	bubbleSort(entities, (a: EntityWithId, b: EntityWithId) =>
+	// 		a.id > b.id ? 1 : -1
+	// 	);
 	_save(entityType, entities);
 	return newEntity;
 }
@@ -66,11 +69,16 @@ async function put(
 		}
 	);
 	entities[idx] = updatedEntity;
-	if (comprator) bubbleSort(entities, comprator);
-	else
-		bubbleSort(entities, (a: EntityWithId, b: EntityWithId) =>
-			a.id > b.id ? 1 : -1
-		);
+
+	if (!comprator)
+		comprator = (a: EntityWithId, b: EntityWithId) => (a.id > b.id ? 1 : -1);
+
+	bubbleSort(entities, comprator);
+	// if (comprator) bubbleSort(entities, comprator);
+	// else
+	// 	bubbleSort(entities, (a: EntityWithId, b: EntityWithId) =>
+	// 		a.id > b.id ? 1 : -1
+	// 	);
 	_save(entityType, entities);
 	return updatedEntity;
 }
