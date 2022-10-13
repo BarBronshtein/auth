@@ -49,10 +49,14 @@
 import { defineComponent } from "vue";
 import { userService } from "@/services/user.service";
 import { useUserStore } from "@/stores/user";
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 export default defineComponent({
   name: "login-form",
   components: {},
+  created() {
+    // If user is alraedy logged routes you to personal-info  page
+    if (this.user) this.$router.push('/personal-info')
+  },
   data() {
     return {
       signup: false,
@@ -132,6 +136,7 @@ export default defineComponent({
     emailValidation() {
       return `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$`;
     },
+    ...mapState(useUserStore, ['user']),
   },
 });
 </script>
