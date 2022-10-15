@@ -10,7 +10,15 @@
           alt="">
         <div class="overlay"></div>
       </div>
-      <span>Change photo</span>
+      <span v-if="!imgByUrl" @click="imgByUrl=true">Change photo</span>
+      <div v-else class="input-group img-url">
+        <label>Image url</label>
+        <div class="input-container">
+          <input type="text" v-model="user.photo" placeholder="Enter your image url">
+          <button @click="imgByUrl=false" type="button" class="action-btn">Save</button>
+        </div>
+      </div>
+
     </div>
     <div class="input-group">
       <label>Name</label>
@@ -57,6 +65,7 @@ export default defineComponent({
     return {
       isOccupied: false,
       userMsg: '',
+      imgByUrl: false,
     }
   },
   methods: {

@@ -56,6 +56,7 @@
 			font-size: rem(13px);
 			color: #828282;
 			line-height: 1.125rem;
+			cursor: pointer;
 			margin-inline-start: rem(28px);
 		}
 	}
@@ -65,7 +66,7 @@
 			font-size: rem(13px);
 			line-height: 1.125rem;
 			display: block;
-			margin-bottom: 4px;
+			margin-bottom: 0.25rem;
 		}
 		input,
 		textarea {
@@ -88,6 +89,20 @@
 				height: rem(92px);
 				font-size: rem(13px);
 				font-family: 'NotoSans-Regular';
+			}
+		}
+		&.img-url {
+			margin: 0 1rem;
+			width: 80%;
+			.input-container {
+				display: flex;
+			}
+			input {
+				margin: 0;
+				margin-inline-end: 1rem;
+			}
+			.action-btn {
+				margin-bottom: 0;
 			}
 		}
 	}
