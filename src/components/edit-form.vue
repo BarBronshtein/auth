@@ -14,13 +14,13 @@
     </div>
     <div class="input-group">
       <label>Name</label>
-      <input ref="fullname" v-model="user.fullname" type="text" placeholder="Enter your name..." required>
+      <input @blur="validateForm" ref="fullname" v-model="user.fullname" type="text" placeholder="Enter your name..."
+        required>
     </div>
     <div class="input-group">
       <label>Bio</label>
       <textarea name="bio" class="bio" cols="30" rows="10" v-model="user.bio"
         placeholder="Enter your bio..."></textarea>
-      <!-- <input v-model="user.bio" class="bio" type="text" placeholder="Enter your bio..."> -->
     </div>
     <div class="input-group">
       <label>Phone</label>
@@ -28,13 +28,14 @@
     </div>
     <div class="input-group">
       <label>Email</label>
-      <input ref="email" v-model="user.email" type="email" :pattern="emailValidation" placeholder="Enter your name..."
-        required>
+      <input @blur="validateForm();
+      isEmailOccupied();" ref="email" v-model="user.email" type="email" :pattern="emailValidation"
+        placeholder="Enter your name..." required>
     </div>
     <div class="input-group">
       <label>Password</label>
-      <input ref="password" type="password" v-model="user.password" minlength="6" placeholder="Enter your password..."
-        required>
+      <input @blur="validateForm" ref="password" type="password" v-model="user.password" minlength="6"
+        placeholder="Enter your password..." required>
     </div>
     <button class="action-btn">Save</button>
   </form>
@@ -49,7 +50,8 @@ export default defineComponent({
   props: {
     user: {
       type: Object as PropType<User>
-    }, originalEmail: String
+    },
+    originalEmail: { type: String }
   },
   data() {
     return {
@@ -63,11 +65,14 @@ export default defineComponent({
       el.classList.remove(removeClass);
     },
     async isEmailOccupied() {
+      const elEmail = this.$refs.email as HTMLInputElement;
       if (!this.user) return;
-      if (this.user.email === this.originalEmail) return;
+      if (this.user.email === this.originalEmail) {
+        this.addClass(elEmail, "correct", "incorrect");
+        return;
+      }
       // Convert isOccupied to true until server respond comes back
       this.isOccupied = true;
-      const elEmail = this.$refs.email as HTMLInputElement;
       if (elEmail.checkValidity()) {
         this.userMsg = "Checking if email is occupied";
         const res = await userService.getUserByEmail(this.user.email);
@@ -79,6 +84,21 @@ export default defineComponent({
           this.userMsg = "✔️";
           this.addClass(elEmail, "correct", "incorrect");
         }
+      }
+    },
+    validateForm() {
+      const elPass = this.$refs.password as HTMLInputElement;
+      const elEmail = this.$refs.email as HTMLInputElement;
+      const elName = this.$refs.fullname as HTMLInputElement;
+      if (elPass.checkValidity()) this.addClass(elPass, "correct", "incorrect");
+      else this.addClass(elPass, "incorrect", "correct");
+      if (elEmail.checkValidity() && !this.isOccupied)
+        this.addClass(elEmail, "correct", "incorrect");
+      else this.addClass(elEmail, "incorrect", "correct");
+      if (elName.value) {
+        this.addClass(elName, "correct", "incorrect");
+      } else {
+        this.addClass(elName, "incorrect", "correct");
       }
     },
   },

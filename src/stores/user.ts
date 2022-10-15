@@ -12,9 +12,8 @@ export type User = {
 
 export const useUserStore = defineStore('user', {
 	state: () => ({
-		user:
-			JSON.parse(sessionStorage.getItem('loggedinUser') as string) ||
-			(null as User | null),
+		user: (JSON.parse(sessionStorage.getItem('loggedinUser') as string) ||
+			null) as User | null,
 		users: null! as User[],
 	}),
 	getters: {},
