@@ -133,7 +133,7 @@ export default defineComponent({
     },
     formSubmit() {
       if (!this.isOccupied)
-        this.$emit('updateUser', this.user);
+        this.$emit('onUpdateUser', this.user);
     }
   },
   computed: {
@@ -142,7 +142,7 @@ export default defineComponent({
     },
     userImg() {
       if (!this.user) return;
-      return this.user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`
+      return this.user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`;
     }
   },
 })

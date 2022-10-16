@@ -1,3 +1,4 @@
+import { userService } from './../services/user.service';
 import { authService } from './../services/auth.service';
 import { defineStore } from 'pinia';
 
@@ -42,6 +43,15 @@ export const useUserStore = defineStore('user', {
 			} catch (err) {
 				console.log(err);
 				throw new Error('Failed to signup please try again later');
+			}
+		},
+		async updateUser(user: User) {
+			try {
+				const updatedUser = (await userService.updateUser(user)) as User;
+				this.setUser(updatedUser);
+			} catch (err) {
+				console.log(err);
+				throw new Error('Failed to update account please try again later');
 			}
 		},
 		setUser(user: User | null) {
