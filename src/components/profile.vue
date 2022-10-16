@@ -1,5 +1,5 @@
 <template>
-  <section class="profile">
+  <section class="profile main-layout">
     <profileInfoLabel class="first-label">
       <template #first>
         <div>

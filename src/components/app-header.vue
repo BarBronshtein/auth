@@ -1,5 +1,5 @@
 <template>
-  <header v-if="user" class="app-header flex align-center justify-between">
+  <header v-if="user" class="app-header align-center justify-between">
     <div class="logo">Temporary Placeholder</div>
     <div class="flex align-center justify-between">
       <avatar :size="'2rem'" />

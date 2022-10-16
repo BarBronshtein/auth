@@ -5,8 +5,8 @@ import appHeader from '@/components/app-header.vue';
 </script>
 
 <template>
-  <app-header />
-  <RouterView />
+  <app-header class="main-layout" />
+  <RouterView class="main-layout" />
 </template>
 
 <style scoped>
