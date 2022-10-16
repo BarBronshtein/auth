@@ -4,7 +4,7 @@
     <p>Changes will be reflected every services</p>
     <div class="img-group-input">
       <div class="img-container">
-        <input class="img-input" type="file" />
+        <input class="img-input" type="file" accept="image/*" @change="handleFile" />
         <img
           :src="user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png` "
           alt="">
@@ -94,6 +94,17 @@ export default defineComponent({
           this.addClass(elEmail, "correct", "incorrect");
         }
       }
+    },
+    handleFile(ev: Event) {
+      const elInput = ev.currentTarget as HTMLInputElement
+      const file = elInput.files?.[0]
+      if (!file) return;
+      const res = this.isValidImage(file);
+    },
+    isValidImage(file: File) {
+      const pattern = /image-*/;
+      if (!file.type.match(pattern)) return false;
+      return true;
     },
     validateForm() {
       const elPass = this.$refs.password as HTMLInputElement;
