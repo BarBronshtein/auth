@@ -12,7 +12,7 @@
     <profileInfoLabel class="border-top" v-for="(el,i) in data" :key="el.first">
       <template #first><span class="uppercase first">{{el.first}}</span></template>
       <template #second>
-        <img class="second" v-if="!i" :src="el.second">
+        <img class="second avatar" v-if="!i" :src="el.second">
         <p class="second" v-else>{{el.second}}</p>
       </template>
     </profileInfoLabel>

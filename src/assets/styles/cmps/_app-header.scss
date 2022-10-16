@@ -2,4 +2,12 @@
 	margin-top: 2rem;
 	display: flex;
 	margin-bottom: rem(62px);
+	.flex {
+		.avatar {
+			margin-inline-end: 0.75rem;
+		}
+		& > :last-child {
+			margin-inline-start: 1.25rem;
+		}
+	}
 }

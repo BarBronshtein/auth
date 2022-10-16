@@ -1,7 +1,7 @@
 <template>
   <header v-if="user" class="app-header align-center justify-between">
-    <div class="logo">Temporary Placeholder</div>
-    <div class="flex align-center justify-between">
+    <div class="logo">Logo</div>
+    <div class="flex align-center">
       <avatar :size="'2rem'" />
       <span>{{user.fullname}}</span>
       <span :class="`fa-solid fa-caret-${isOpen ? 'up' :'down'}`"></span>
