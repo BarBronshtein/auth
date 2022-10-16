@@ -96,10 +96,14 @@ export default defineComponent({
       }
     },
     handleFile(ev: Event) {
-      const elInput = ev.currentTarget as HTMLInputElement
-      const file = elInput.files?.[0]
+      const elInput = ev.currentTarget as HTMLInputElement;
+      const file = elInput.files?.[0];
       if (!file) return;
-      const res = this.isValidImage(file);
+      if (this.isValidImage(file)) this.uploadFile();
+
+    },
+    async uploadFile() {
+      // Call service function to upload the image
     },
     isValidImage(file: File) {
       const pattern = /image-*/;
