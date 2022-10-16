@@ -7,7 +7,7 @@
           <p>Some info may be visible to others</p>
         </div>
       </template>
-      <template #second><button class="btn">Edit</button></template>
+      <template #second><button @click="$router.push('/personal-info/edit')" class="btn">Edit</button></template>
     </profileInfoLabel>
     <profileInfoLabel class="border-top" v-for="(el,i) in data" :key="el.first">
       <template #first><span class="uppercase first">{{el.first}}</span></template>
@@ -27,7 +27,7 @@ export default defineComponent({
   name: "profile",
   components: { profileInfoLabel },
   props: {
-    user: { type: Object as PropType<User> }
+    user: { type: Object as PropType<User | null> }
   },
   data() {
     return {

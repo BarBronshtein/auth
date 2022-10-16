@@ -116,6 +116,12 @@
 .fa-al::before {
 	content: '\f104';
 }
+.fa-caret-up::before {
+	content: '\f0d8';
+}
+.fa-caret-down::before {
+	content: '\f0d7';
+}
 
 .active {
 	color: #2d9cdb;
