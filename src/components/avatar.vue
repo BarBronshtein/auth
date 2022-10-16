@@ -1,5 +1,5 @@
 <template>
-  <img class="avatar" :style="{width:size,height:size}" :src="img">
+  <img class="avatar" :style="{width:size||'2rem',height:size||'2rem'}" :src="img">
 </template>
 
 <script lang="ts">
@@ -9,7 +9,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'avatar',
   props: {
-    size: { type: Number },
+    size: { type: String },
   },
   computed: {
     ...mapState(useUserStore, ['user']),
