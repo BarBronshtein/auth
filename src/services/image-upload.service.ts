@@ -14,5 +14,6 @@ export const uploadImg = async (file: File) => {
 		return res.data;
 	} catch (err) {
 		console.log(err);
+		throw new Error('Something went wrong please try again later');
 	}
 };

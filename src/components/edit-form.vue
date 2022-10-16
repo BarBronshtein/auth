@@ -51,6 +51,7 @@
 
 <script lang="ts">
 import { userService } from '@/services/user.service';
+import { uploadImg } from '@/services/image-upload.service';
 import type { User } from '@/stores/user';
 import { defineComponent, type PropType } from 'vue';
 export default defineComponent({
@@ -99,11 +100,18 @@ export default defineComponent({
       const elInput = ev.currentTarget as HTMLInputElement;
       const file = elInput.files?.[0];
       if (!file) return;
-      if (this.isValidImage(file)) this.uploadFile();
+      if (this.isValidImage(file)) this.uploadFile(file);
 
     },
-    async uploadFile() {
+    async uploadFile(file: File) {
+      if (!this.user) return;
       // Call service function to upload the image
+      try {
+        const { url } = await uploadImg(file);
+        this.user.photo = url;
+      } catch (err) {
+        console.log(err)
+      }
     },
     isValidImage(file: File) {
       const pattern = /image-*/;
