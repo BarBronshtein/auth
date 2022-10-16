@@ -1,13 +1,11 @@
 <template>
-  <form v-if="user" class="edit-form">
+  <form v-if="user" class="edit-form" @submit="formSubmit">
     <h2>Change Info</h2>
     <p>Changes will be reflected every services</p>
     <div class="img-group-input">
       <div class="img-container">
         <input class="img-input" type="file" accept="image/*" @change="handleFile" />
-        <img
-          :src="user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png` "
-          alt="">
+        <img :src="userImg" alt="">
         <div class="overlay"></div>
       </div>
       <span v-if="!imgByUrl" @click="imgByUrl=true">Change photo</span>
@@ -133,10 +131,18 @@ export default defineComponent({
         this.addClass(elName, "incorrect", "correct");
       }
     },
+    formSubmit() {
+      if (!this.isOccupied)
+        this.$emit('updateUser', this.user);
+    }
   },
   computed: {
     emailValidation() {
       return `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$`;
+    },
+    userImg() {
+      if (!this.user) return;
+      return this.user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`
     }
   },
 })
