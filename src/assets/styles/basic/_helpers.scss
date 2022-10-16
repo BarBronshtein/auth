@@ -63,6 +63,13 @@
 	transform: rotate(-180deg);
 }
 
+// Avatar
+.avatar {
+	object-fit: cover;
+	max-width: 100%;
+	border-radius: 0.5rem;
+}
+
 // Aspect ratios
 
 .ratio-16-9 {
