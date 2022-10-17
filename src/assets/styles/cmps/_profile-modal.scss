@@ -1,8 +1,29 @@
 .profile-modal {
 	position: absolute;
 	right: 0;
+	background-color: #fff;
 	bottom: calc(-2rem - rem(41px));
+	border: 1px solid #e0e0e0;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+	border-radius: 0.75rem;
 	.modal-wrapper {
 		padding: rem(15px) 0.75rem;
+		.modal-item {
+			text-transform: capitalize;
+			display: flex;
+			align-items: center;
+			padding: 0.75rem 0.875rem;
+			border-radius: 0.5rem;
+			& > :first-child {
+				margin-inline-end: 0.75rem;
+			}
+			&:last-child {
+				border-top: 1px solid #e0e0e0;
+				color: red;
+			}
+			&.active {
+				background-color: #f2f2f2;
+			}
+		}
 	}
 }

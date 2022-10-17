@@ -1,5 +1,5 @@
 <template>
-  <section class="profile-modal modal">
+  <section @click.stop="" class="profile-modal modal">
     <div class="modal-wrapper">
       <div v-for="(label,i) in data" :key="label.title" class="modal-item" :class="!i ? 'active':''">
         <span :class="`fa-solid fa-${label.icon}`"></span>
@@ -15,7 +15,7 @@ export default defineComponent({
   name: 'profile-modal',
   data() {
     return {
-      data: [{ icon: 'circle-user', title: 'my profile' }, { icon: 'right-from-bracket', title: 'logout' }]
+      data: [{ icon: 'circle-user', title: 'my profile' }, { icon: 'user-group', title: 'messanger' }, { icon: 'right-from-bracket', title: 'logout' }]
     }
   },
   methods: {},
