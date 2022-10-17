@@ -4,7 +4,7 @@
     <div class="flex align-center" @click="isOpen=!isOpen">
       <avatar :size="'2rem'" />
       <span>{{user.fullname}}</span>
-      <profileModal v-if="isOpen" />
+      <profileModal v-if="isOpen" @onLogout="exitAccount" @onGoTo="goTo" />
       <span :class="`fa-solid fa-caret-${isOpen ? 'up' :'down'}`"></span>
     </div>
   </header>
@@ -14,7 +14,7 @@
 import avatar from './avatar.vue';
 import profileModal from './profile-modal.vue';
 import { useUserStore } from '@/stores/user';
-import { mapState } from 'pinia';
+import { mapState, mapActions } from 'pinia';
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'app-header',
@@ -25,6 +25,20 @@ export default defineComponent({
   data() {
     return {
       isOpen: false,
+    }
+  },
+  methods: {
+    ...mapActions(useUserStore, ['logout']),
+    exitAccount() {
+      this.isOpen = false;
+      this.logout();
+      this.$router.push('/')
+    },
+    goTo(end: string) {
+      if (end === 'my profile') {
+        this.$router.push('/personal-info');
+      }
+      this.isOpen = false;
     }
   },
   computed: {
