@@ -5,6 +5,10 @@
 }
 body {
 	font-family: 'NotoSans-Regular';
+	&:has(.login-form) {
+		background-color: #fff;
+	}
+	background-color: #fafafb;
 }
 
 a {

@@ -3,6 +3,8 @@
 	display: flex;
 	margin-bottom: rem(62px);
 	.flex {
+		position: relative;
+		cursor: pointer;
 		.avatar {
 			margin-inline-end: 0.75rem;
 		}

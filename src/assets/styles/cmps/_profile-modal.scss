@@ -1,0 +1,8 @@
+.profile-modal {
+	position: absolute;
+	right: 0;
+	bottom: calc(-2rem - rem(41px));
+	.modal-wrapper {
+		padding: rem(15px) 0.75rem;
+	}
+}
