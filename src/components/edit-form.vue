@@ -2,7 +2,7 @@
   <form v-if="user" class="edit-form" @submit="formSubmit">
     <h2>Change Info</h2>
     <p>Changes will be reflected every services</p>
-    <div class="img-group-input">
+    <div class="photo-input">
       <div class="img-container">
         <input class="img-input" type="file" accept="image/*" @change="handleFile" />
         <img :src="userImg" alt="">
@@ -30,7 +30,7 @@
     </div>
     <div class="input-group">
       <label>Phone</label>
-      <input v-model="user.phone" type="text" placeholder="Enter your phone...">
+      <input v-model="user.phone" type="tel" placeholder="Enter your phone...">
     </div>
     <div class="input-group">
       <label>Email</label>
@@ -89,7 +89,7 @@ export default defineComponent({
           this.userMsg = "This email is already occupied please try another email";
           this.addClass(elEmail, "incorrect", "correct");
         } else {
-          this.userMsg = "✔️";
+          this.userMsg = '';
           this.addClass(elEmail, "correct", "incorrect");
         }
       }

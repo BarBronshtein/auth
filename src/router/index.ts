@@ -1,3 +1,4 @@
+import { useUserStore } from './../stores/user';
 import loginForm from '@/views/login-form.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 const router = createRouter({
@@ -5,7 +6,7 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			name: 'login-form',
+			name: 'login',
 			component: loginForm,
 		},
 		{
@@ -24,4 +25,11 @@ const router = createRouter({
 	],
 });
 
+router.beforeEach((to, from) => {
+	const store = useUserStore();
+	if (!store.user && to.path !== '/') {
+		from.path = to.path;
+		return { name: 'login' };
+	}
+});
 export default router;
