@@ -5,7 +5,7 @@ import appHeader from '@/components/app-header.vue';
 </script>
 
 <template>
-  <app-header class="main-layout" />
+  <app-header />
   <RouterView class="main-layout" />
 </template>
 
