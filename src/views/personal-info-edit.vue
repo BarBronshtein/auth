@@ -28,7 +28,8 @@ export default defineComponent({
   computed: {
     ...mapState(useUserStore, ['user']),
     userToChange() {
-      return JSON.parse(JSON.stringify(this.user));
+      const userToChange = this.user as User
+      return JSON.parse(JSON.stringify(userToChange));
     }
   },
   created() {

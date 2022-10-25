@@ -30,10 +30,19 @@
 		object-fit: cover;
 	}
 	& p.second {
+		word-break: break-word;
 		text-align: left;
 		font-size: 1.125rem;
 		letter-spacing: -0.035em;
 		color: #333;
 		line-height: lh(25px);
+	}
+}
+
+@media screen and (max-width: 420px) {
+	.profile-info-label {
+		& p.second {
+			max-width: 130px;
+		}
 	}
 }

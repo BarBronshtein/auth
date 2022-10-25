@@ -2,13 +2,13 @@
   <div class="login-form" :class="signup ? 'signup' : ''">
     <div class="form-wrapper">
       <div class="logo">
-        <img src="	https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png" alt="" />
+        <img src="https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png" alt="" />
       </div>
       <div class="form-header">
         <h2>Sign up to see photos and videos from your friends.</h2>
       </div>
       <form class="form" @submit.prevent="formSubmit">
-        <h4 v-if="userMsg">{{ userMsg }}</h4>
+        <h4 v-if="signup" style="color:red;margin-bottom:1rem;min-height: 3rem;">{{ userMsg }}</h4>
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
           <input @blur="
@@ -118,7 +118,7 @@ export default defineComponent({
           this.userMsg = "This email is already occupied please try another email";
           this.addClass(elEmail, "incorrect", "correct");
         } else {
-          this.userMsg = "✔️";
+          this.userMsg = '';
           this.addClass(elEmail, "correct", "incorrect");
         }
       }

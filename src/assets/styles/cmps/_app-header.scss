@@ -1,5 +1,5 @@
 .app-header {
-	margin: 2rem rem(75px);
+	margin: 2rem 3rem;
 	display: flex;
 	margin-bottom: rem(62px);
 	.flex {
@@ -10,6 +10,23 @@
 		}
 		& > :last-child {
 			margin-inline-start: 1.25rem;
+		}
+	}
+}
+@media screen and (min-width: 500px) {
+	.app-header {
+		margin: 2rem rem(75px);
+	}
+}
+@media screen and (max-width: 420px) {
+	.app-header {
+		.flex {
+			span {
+				max-width: 85px;
+			}
+			& > :last-child {
+				margin-inline-start: 0;
+			}
 		}
 	}
 }

@@ -3,8 +3,17 @@
 		color: #2d9cdb;
 		margin-bottom: 1.5rem;
 		display: block;
+		margin-inline-start: 3rem;
 	}
 	.edit-form {
 		margin-bottom: 2.5rem;
+	}
+}
+
+@media screen and (min-width: 860px) {
+	.personal-info-edit {
+		a:first-of-type {
+			margin-inline-start: 0;
+		}
 	}
 }
