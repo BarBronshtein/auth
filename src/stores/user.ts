@@ -9,6 +9,7 @@ export type User = {
 	photo?: string;
 	bio?: string;
 	phone?: string;
+	_id?: string;
 };
 
 export const useUserStore = defineStore('user', {

@@ -1,8 +1,7 @@
 import type { User } from './../stores/user';
 import { userService } from './user.service';
-// import axios from 'axios';
 import { binarySearch } from './util.service';
-// axios.defaults.withCredentials = true;
+import { httpService } from './htttp.service';
 export const authService = {
 	login,
 	signup,
@@ -11,14 +10,13 @@ export const authService = {
 	findEmail,
 };
 
-// const API = '//localhost:3030/api/auth/';
 const STORAGE_KEY = 'loggedinUser';
 async function login(credentials: { password: string; email: string }) {
 	try {
-		// const res = await axios.post(API + 'login', credentials);
-		const res = await authenticate(credentials);
-		// return _saveToSession(res.data);
-		return _saveToSession(res);
+		const res = await httpService.post('auth/login', credentials);
+		return _saveToSession(res.data);
+		// const res = await authenticate(credentials);
+		// return _saveToSession(res);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to login try again later');
@@ -27,10 +25,10 @@ async function login(credentials: { password: string; email: string }) {
 
 async function signup(signUpInfo: User) {
 	try {
-		// const res = await axios.post(API + 'signup', signUpInfo);
-		const res = await userService.addUser(signUpInfo);
-		// return _saveToSession(res.data);
-		return _saveToSession(res as User);
+		const res = await httpService.post('auth/signup', signUpInfo);
+		return _saveToSession(res.data);
+		// const res = await userService.addUser(signUpInfo);
+		// return _saveToSession(res as User);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to signup try again later');
@@ -39,7 +37,7 @@ async function signup(signUpInfo: User) {
 
 async function logout() {
 	try {
-		// await axios.post(API + 'logout');
+		await httpService.post('auth/logout');
 		sessionStorage.removeItem(STORAGE_KEY);
 	} catch (err) {
 		throw new Error('Failed to logout try again later');
