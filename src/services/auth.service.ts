@@ -14,7 +14,7 @@ const STORAGE_KEY = 'loggedinUser';
 async function login(credentials: { password: string; email: string }) {
 	try {
 		const res = await httpService.post('auth/login', credentials);
-		return _saveToSession(res.data);
+		return _saveToSession(res);
 		// const res = await authenticate(credentials);
 		// return _saveToSession(res);
 	} catch (err) {

@@ -1,6 +1,7 @@
 import { useUserStore } from './../stores/user';
-import loginForm from '@/views/login-form.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import loginForm from '@/views/login-form.vue';
+
 const router = createRouter({
 	history: createWebHashHistory(import.meta.env.BASE_URL),
 	routes: [

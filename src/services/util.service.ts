@@ -84,9 +84,9 @@ export function binarySearch(
 	returnIndex = false
 ) {
 	if (typeof comprator !== 'function')
-		comprator = (a: string | number, b: string | number) => {
-			if (a === b) return 1;
-			if (a < b) return -1;
+		comprator = (target: string | number, arrayEl: string | number) => {
+			if (target === arrayEl) return 1;
+			if (target < arrayEl) return -1;
 		};
 	let [start, end] = [0, arr.length - 1];
 	while (start <= end) {
@@ -115,7 +115,6 @@ export function bubbleSort(arr: any[], comprator?: Function) {
 	}
 	return arr;
 }
-
 export function insertionSort(arr: any[], comprator?: Function) {
 	if (typeof comprator !== 'function')
 		comprator = (a: string | number, b: string | number) => (a > b ? 1 : -1);

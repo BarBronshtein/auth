@@ -21,7 +21,7 @@ async function getUsers(filterBy = null) {
 async function getUserByEmail(email: string) {
 	// const users = (await storageService.query(STORAGE_KEY)) as User[];
 	// return findEmail(users, email);
-	return await httpService.get(`user/${email}`);
+	return await httpService.get(`user/email/${email}`);
 }
 
 async function addUser(user: User) {

@@ -1,11 +1,11 @@
 <template>
   <header v-if="user" class="app-header align-center justify-between">
     <div class="logo">Logo</div>
-    <div class="flex align-center" @click="isOpen=!isOpen">
+    <div class="flex align-center" @click="isOpen = !isOpen">
       <avatar :size="'2rem'" />
-      <span>{{user.fullname}}</span>
+      <span>{{ user.fullname }}</span>
       <profileModal v-if="isOpen" @onLogout="exitAccount" @onGoTo="goTo" />
-      <span :class="`fa-solid fa-caret-${isOpen ? 'up' :'down'}`"></span>
+      <span :class="`fa-solid fa-caret-${isOpen ? 'up' : 'down'}`"></span>
     </div>
   </header>
 </template>
@@ -29,9 +29,9 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(useUserStore, ['logout']),
-    exitAccount() {
+    async exitAccount() {
       this.isOpen = false;
-      this.logout();
+      await this.logout();
       this.$router.push('/')
     },
     goTo(end: string) {
