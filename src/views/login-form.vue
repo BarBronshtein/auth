@@ -12,8 +12,8 @@
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
           <input @blur="
-            validateForm();
-            isEmailOccupied();
+  validateForm();
+isEmailOccupied();
           " ref="email" v-model="credentials.email" type="email" placeholder="Email" required
             :pattern="emailValidation" />
         </div>
@@ -38,8 +38,8 @@
       </div>
       <small class="text-center">{{ signup ? "Already a member" : "Dont have an account yet" }}?
         <small class="active" @click="
-          signup = !signup;
-          resetFields();
+  signup = !signup;
+resetFields();
         ">{{ signup ? "Login" : "Register" }}</small></small>
     </div>
   </div>
@@ -55,7 +55,7 @@ export default defineComponent({
   components: {},
   created() {
     // If user is alraedy logged routes you to personal-info  page
-    if (this.user) this.$router.push('/personal-info')
+    if (this.user) this.$router?.push('/personal-info')
   },
   data() {
     return {
@@ -100,7 +100,7 @@ export default defineComponent({
           await this.toSignup(this.credentials);
         } else await this.toLogin(this.credentials);
         this.resetFields();
-        this.$router.push('/personal-info')
+        this.$router?.push('/personal-info')
       } catch (err) {
         console.log(err);
         this.userMsg = err as string;

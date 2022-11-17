@@ -10,7 +10,8 @@ export default defineConfig({
 			name: 'auth-app',
 			filename: 'remoteEntry.js',
 			exposes: {
-				'./Login': './src/views/login-form.vue',
+				'./Login': './src/exports/login.ts',
+				'./App': './src/exports/App.ts',
 			},
 		}),
 	],
