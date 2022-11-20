@@ -10,8 +10,8 @@ export default defineConfig({
 			name: 'auth-app',
 			filename: 'remoteEntry.js',
 			exposes: {
-				'./Login': './src/exports/login.ts',
-				'./App': './src/exports/App.ts',
+				'./Login': './src/exports/exports.ts',
+				'./Store': './src/exports/Store.ts',
 			},
 		}),
 	],
