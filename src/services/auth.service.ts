@@ -57,8 +57,9 @@ export function findEmail(users: User[], email: string) {
 	const comprator = (a: string, b: User) => {
 		if (a === b.email) return 1;
 		if (a < b.email) return -1;
+		return 0;
 	};
-	return binarySearch(users, email, comprator);
+	return binarySearch(users, email, false, comprator);
 }
 
 async function authenticate(credentials: { password: string; email: string }) {
