@@ -26,7 +26,7 @@ async function login(credentials: { password: string; email: string }) {
 async function signup(signUpInfo: User) {
 	try {
 		const res = await httpService.post('auth/signup', signUpInfo);
-		return _saveToSession(res.data);
+		return _saveToSession(res);
 		// const res = await userService.addUser(signUpInfo);
 		// return _saveToSession(res as User);
 	} catch (err) {
