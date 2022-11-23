@@ -61,7 +61,7 @@ async function put<T extends Required<Entity>>(
 ): Promise<T> {
 	const entities = await query<T>(entityType);
 	if (!searchFunction)
-		searchFunction = (target, entity: T) => {
+		searchFunction = (target: string | number, entity: T) => {
 			if (target === entity._id) return 1;
 			if (target < entity._id) return -1;
 			return 0;
@@ -91,11 +91,16 @@ async function remove<T extends Required<Entity>>(
 ): Promise<boolean> {
 	const entities = await query<T>(entityType);
 	// const _idx = entities.findIndex(entity => entity._id === entityId);
-	const idx = binarySearch<T>(entities, entityId, true, (target, entity: T) => {
-		if (target === entity._id) return 1;
-		if (target < entity._id) return -1;
-		return 0;
-	}) as number;
+	const idx = binarySearch<T>(
+		entities,
+		entityId,
+		true,
+		(target: string | number, entity: T) => {
+			if (target === entity._id) return 1;
+			if (target < entity._id) return -1;
+			return 0;
+		}
+	) as number;
 	if (idx !== -1) entities.splice(idx, 1);
 	else
 		throw new Error(

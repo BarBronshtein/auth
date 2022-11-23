@@ -90,9 +90,7 @@ export default defineComponent({
       }
     },
     async formSubmit() {
-      // Signup
       try {
-
         if (this.signup) {
           // If the respond from the server didn't come up yet or came back positive then return
           if (this.isOccupied) return;
@@ -105,7 +103,6 @@ export default defineComponent({
         console.log(err);
         this.userMsg = err as string;
       }
-      // Login
     },
     async isEmailOccupied() {
       if (!this.signup) return;

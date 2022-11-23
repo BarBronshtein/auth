@@ -81,10 +81,10 @@ export function binarySearch<T>(
 	arr: T[],
 	target: string | number,
 	returnIndex = false,
-	comprator?: (target: string | number, arrayEl: T) => number
+	comprator?: Function
 ) {
-	if (typeof comprator !== 'function')
-		comprator = (target, arrayEl: T) => {
+	if (!comprator)
+		comprator = (target: string | number, arrayEl: string | number) => {
 			if (target === arrayEl) return 1;
 			if (target < arrayEl) return -1;
 			return 0;

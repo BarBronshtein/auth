@@ -54,7 +54,7 @@ function _saveToSession(user: User) {
 }
 
 export function findEmail(users: User[], email: string) {
-	const comprator = (a: string, b: User) => {
+	const comprator = (a: string | number, b: User) => {
 		if (a === b.email) return 1;
 		if (a < b.email) return -1;
 		return 0;
