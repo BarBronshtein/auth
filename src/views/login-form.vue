@@ -25,7 +25,7 @@ isEmailOccupied();
         <div v-if="signup" class="input-group">
           <span class="fa-solid fa-user"></span>
           <input required @blur="validateForm" ref="fullname" v-model="credentials.fullname" type="text"
-            placeholder="Full Name" />
+            placeholder="Full Name" autocomplete="name" />
         </div>
         <!-- TODO: Make action-btn a component -->
         <button class="action-btn">{{ signup ? "Sign Up" : "Login" }}</button>

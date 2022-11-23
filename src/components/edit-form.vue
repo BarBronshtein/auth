@@ -8,12 +8,12 @@
         <img :src="userImg" alt="">
         <div class="overlay"></div>
       </div>
-      <span v-if="!imgByUrl" @click="imgByUrl=true">Change photo</span>
+      <span v-if="!imgByUrl" @click="imgByUrl = true">Change photo</span>
       <div v-else class="input-group img-url">
         <label>Image url</label>
         <div class="input-container">
           <input type="text" v-model="user.photo" placeholder="Enter your image url">
-          <button @click="imgByUrl=false" type="button" class="action-btn">Save</button>
+          <button @click="imgByUrl = false" type="button" class="action-btn">Save</button>
         </div>
       </div>
 
@@ -36,12 +36,12 @@
       <label>Email</label>
       <input @blur="validateForm();
       isEmailOccupied();" ref="email" v-model="user.email" type="email" :pattern="emailValidation"
-        placeholder="Enter your name..." required>
+        placeholder="Enter your name..." required autocomplete="username">
     </div>
     <div class="input-group">
       <label>Password</label>
       <input @blur="validateForm" ref="password" type="password" v-model="user.password" minlength="6"
-        placeholder="Enter your password..." required>
+        placeholder="Enter your password..." required autocomplete="current-password">
     </div>
     <button class="action-btn">Save</button>
   </form>
