@@ -15,12 +15,12 @@
   validateForm();
 isEmailOccupied();
           " ref="email" v-model="credentials.email" type="email" placeholder="Email" required
-            :pattern="emailValidation" />
+            :pattern="emailValidation" autocomplete="username" />
         </div>
         <div class="input-group">
           <span class="fa-solid fa-lock"></span>
           <input @blur="validateForm" ref="password" v-model="credentials.password" type="password"
-            placeholder="Password" minlength="6" required />
+            placeholder="Password" minlength="6" required autocomplete="current-password" />
         </div>
         <div v-if="signup" class="input-group">
           <span class="fa-solid fa-user"></span>

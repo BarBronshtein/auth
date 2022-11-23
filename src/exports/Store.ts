@@ -5,7 +5,7 @@ const getStore = () => {
 	return toRaw(useUserStore());
 };
 
-const convertToRaw = (proxy: typeof Proxy) => {
+const convertToRaw = (proxy: ProxyConstructor) => {
 	return toRaw(proxy);
 };
 

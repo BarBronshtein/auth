@@ -3,9 +3,9 @@ import personalInfo from '@/views/personal-info.vue';
 import { createApp, type DefineComponent } from 'vue';
 import loginForm from '@/views/login-form.vue';
 import { createPinia } from 'pinia';
-const mount = <T>(component: T) => {
+const mount = <T extends Partial<DefineComponent>>(component: T) => {
 	return (el: HTMLElement) => {
-		const app = createApp(component as DefineComponent);
+		const app = createApp(component);
 		app.use(createPinia());
 		app.mount(el);
 	};
