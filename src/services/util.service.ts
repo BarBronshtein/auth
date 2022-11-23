@@ -77,16 +77,17 @@ function timeAgo(input: Date | string | number) {
 	}
 }
 
-export function binarySearch(
-	arr: any[],
+export function binarySearch<T>(
+	arr: T[],
 	target: string | number,
-	comprator?: Function,
-	returnIndex = false
+	returnIndex = false,
+	comprator?: (target: string | number, arrayEl: T) => number
 ) {
 	if (typeof comprator !== 'function')
-		comprator = (target: string | number, arrayEl: string | number) => {
+		comprator = (target, arrayEl: T) => {
 			if (target === arrayEl) return 1;
 			if (target < arrayEl) return -1;
+			return 0;
 		};
 	let [start, end] = [0, arr.length - 1];
 	while (start <= end) {
@@ -99,9 +100,12 @@ export function binarySearch(
 	if (returnIndex) return -1;
 }
 
-export function bubbleSort(arr: any[], comprator?: Function) {
+export function bubbleSort<T>(
+	arr: T[],
+	comprator?: (entityA: T, entityB: T) => number
+) {
 	if (typeof comprator !== 'function')
-		comprator = (a: string | number, b: string | number) => (a > b ? 1 : -1);
+		comprator = (entityA, entityB) => (entityA > entityB ? 1 : -1);
 	for (let i = arr.length; i > 0; i--) {
 		let noSwaps = true;
 		for (let j = 0; j < i - 1; j++) {
@@ -115,9 +119,12 @@ export function bubbleSort(arr: any[], comprator?: Function) {
 	}
 	return arr;
 }
-export function insertionSort(arr: any[], comprator?: Function) {
+export function insertionSort<T>(
+	arr: T[],
+	comprator?: (entityA: T, entityB: T) => number
+) {
 	if (typeof comprator !== 'function')
-		comprator = (a: string | number, b: string | number) => (a > b ? 1 : -1);
+		comprator = (entityA, entityB) => (entityA > entityB ? 1 : -1);
 	for (let i = 0; i < arr.length; i++) {
 		const cur = arr[i];
 		for (var j = i - 1; j >= 0 && comprator(arr[j], cur) > 0; j--) {

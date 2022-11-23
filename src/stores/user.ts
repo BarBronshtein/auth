@@ -1,16 +1,16 @@
+import type { Entity } from './../services/async-storage.service';
 import { userService } from './../services/user.service';
 import { authService } from './../services/auth.service';
 import { defineStore } from 'pinia';
 
-export type User = {
+export interface User extends Entity {
 	fullname: string;
 	password: string;
 	email: string;
 	photo?: string;
 	bio?: string;
 	phone?: string;
-	_id?: string;
-};
+}
 
 export const useUserStore = defineStore('user', {
 	state: () => ({
