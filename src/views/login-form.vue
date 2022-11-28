@@ -67,8 +67,7 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapActions(useUserStore, { toSignup: "signup" }),
-    ...mapActions(useUserStore, { toLogin: "login" }),
+    ...mapActions(useUserStore, { toSignup: "signup", toLogin: 'login' }),
     addClass(el: HTMLInputElement, addClass: string, removeClass: string) {
       el.classList.add(addClass);
       el.classList.remove(removeClass);
