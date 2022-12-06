@@ -1,5 +1,6 @@
 import type { User } from '@/stores/user';
 import { storageService } from './async-storage.service';
+import { authService } from './auth.service';
 // import { findEmail } from './auth.service';
 import { httpService } from './htttp.service';
 export const userService = {
@@ -30,7 +31,10 @@ async function addUser(user: User) {
 
 async function updateUser(user: User) {
 	// return await storageService.put(STORAGE_KEY, user as Entity, sortUsersByEmail);
-	return await httpService.put(`user/${user._id}`, user);
+
+	const updatedUser = await httpService.put(`user/${user._id}`, user);
+	authService.saveToSession(user);
+	return updatedUser;
 }
 
 function sortUsersByEmail(a: User, b: User) {

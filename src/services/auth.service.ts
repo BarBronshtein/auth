@@ -8,15 +8,16 @@ export const authService = {
 	logout,
 	getLoggedinUser,
 	findEmail,
+	saveToSession,
 };
 
 const STORAGE_KEY = 'loggedinUser';
 async function login(credentials: { password: string; email: string }) {
 	try {
 		const res = await httpService.post('auth/login', credentials);
-		return _saveToSession(res);
+		return saveToSession(res);
 		// const res = await authenticate(credentials);
-		// return _saveToSession(res);
+		// return saveToSession(res);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to login try again later');
@@ -26,9 +27,9 @@ async function login(credentials: { password: string; email: string }) {
 async function signup(signUpInfo: User) {
 	try {
 		const res = await httpService.post('auth/signup', signUpInfo);
-		return _saveToSession(res);
+		return saveToSession(res);
 		// const res = await userService.addUser(signUpInfo);
-		// return _saveToSession(res as User);
+		// return saveToSession(res as User);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to signup try again later');
@@ -48,7 +49,7 @@ function getLoggedinUser() {
 	return JSON.parse(sessionStorage.getItem(STORAGE_KEY) as string);
 }
 
-function _saveToSession(user: User) {
+function saveToSession(user: User) {
 	sessionStorage.setItem(STORAGE_KEY, JSON.stringify(user));
 	return user;
 }

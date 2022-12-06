@@ -32,11 +32,11 @@ export default defineComponent({
     async exitAccount() {
       this.isOpen = false;
       await this.logout();
-      this.$router.push('/')
+      this.$router?.push('/')
     },
     goTo(end: string) {
       if (end === 'my profile') {
-        this.$router.push('/personal-info');
+        this.$router?.push('/personal-info');
       }
       this.isOpen = false;
     }

@@ -5,7 +5,7 @@
     <div class="photo-input">
       <div class="img-container">
         <input class="img-input" type="file" accept="image/*" @change="handleFile" />
-        <img :src="userImg" alt="">
+        <img :src="(user.photo || userImg)" alt="">
         <div class="overlay"></div>
       </div>
       <span v-if="!imgByUrl" @click="imgByUrl = true">Change photo</span>
@@ -81,7 +81,7 @@ export default defineComponent({
       }
       // Convert isOccupied to true until server respond comes back
       this.isOccupied = true;
-      if (elEmail.checkValidity()) {
+      if (elEmail?.checkValidity()) {
         this.userMsg = "Checking if email is occupied";
         const res = await userService.getUserByEmail(this.user.email);
         this.isOccupied = !!res;
@@ -105,8 +105,9 @@ export default defineComponent({
       if (!this.user) return;
       // Call service function to upload the image
       try {
-        const { url } = await uploadImg(file);
+        const { url }: { url: string } = await uploadImg(file);
         this.user.photo = url;
+        this.$forceUpdate()
       } catch (err) {
         console.log(err)
       }
@@ -120,9 +121,9 @@ export default defineComponent({
       const elPass = this.$refs.password as HTMLInputElement;
       const elEmail = this.$refs.email as HTMLInputElement;
       const elName = this.$refs.fullname as HTMLInputElement;
-      if (elPass.checkValidity()) this.addClass(elPass, "correct", "incorrect");
+      if (elPass?.checkValidity()) this.addClass(elPass, "correct", "incorrect");
       else this.addClass(elPass, "incorrect", "correct");
-      if (elEmail.checkValidity() && !this.isOccupied)
+      if (elEmail?.checkValidity() && !this.isOccupied)
         this.addClass(elEmail, "correct", "incorrect");
       else this.addClass(elEmail, "incorrect", "correct");
       if (elName.value) {
@@ -141,8 +142,7 @@ export default defineComponent({
       return `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$`;
     },
     userImg() {
-      if (!this.user) return;
-      return this.user.photo || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`;
+      return `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png`;
     }
   },
 })
