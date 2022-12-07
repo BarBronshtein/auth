@@ -22,7 +22,10 @@ export default defineComponent({
     ...mapActions(useUserStore, ['updateUser']),
     async update(user: User) {
       await this.updateUser(user);
-      this.$router.push('/personal-info');
+      this.$router?.push('/personal-info') ?? this.customEventEmit('onGoTo', '/profile');
+    },
+    customEventEmit(eventName: 'onGoTo' | 'onLogout', data?: string) {
+      window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
     }
   },
   computed: {
@@ -30,7 +33,8 @@ export default defineComponent({
     userToChange() {
       const userToChange = this.user as User
       return JSON.parse(JSON.stringify(userToChange));
-    }
+    },
+
   },
   created() {
     if (!this.user) this.$router.push('/');
