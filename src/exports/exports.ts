@@ -3,7 +3,9 @@ import personalInfo from '@/views/personal-info.vue';
 import { createApp, type DefineComponent } from 'vue';
 import loginForm from '@/views/login-form.vue';
 import { createPinia } from 'pinia';
-const mount = <T extends Partial<DefineComponent>>(component: T) => {
+import appHeader from '@/components/app-header.vue';
+import profileModal from '@/components/profile-modal.vue';
+export const mount = <T extends Partial<DefineComponent>>(component: T) => {
 	return (el: HTMLElement) => {
 		const app = createApp(component);
 		app.use(createPinia());
@@ -13,4 +15,6 @@ const mount = <T extends Partial<DefineComponent>>(component: T) => {
 const LoginForm = mount(loginForm);
 const PersonalInfo = mount(personalInfo);
 const PersonalInfoEdit = mount(personalInfoEdit);
-export { LoginForm, PersonalInfo, PersonalInfoEdit };
+const AppHeader = mount(appHeader);
+const ProfileModal = mount(profileModal);
+export { LoginForm, PersonalInfo, PersonalInfoEdit, AppHeader, ProfileModal };
