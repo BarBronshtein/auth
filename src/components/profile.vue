@@ -7,13 +7,15 @@
           <p>Some info may be visible to others</p>
         </div>
       </template>
-      <template #second><button @click="$router.push('/personal-info/edit')" class="btn">Edit</button></template>
+      <template #second><button
+          @click="$router?.push('/personal-info/edit') ?? customEventEmit('onGoTo', 'profile-edit')"
+          class="btn">Edit</button></template>
     </profileInfoLabel>
-    <profileInfoLabel class="border-top" v-for="(el,i) in data" :key="el.first">
-      <template #first><span class="uppercase first">{{el.first}}</span></template>
+    <profileInfoLabel class="border-top" v-for="(el, i) in data" :key="el.first">
+      <template #first><span class="uppercase first">{{ el.first }}</span></template>
       <template #second>
         <img class="second avatar" v-if="!i" :src="el.second">
-        <p class="second" v-else>{{el.second}}</p>
+        <p class="second" v-else>{{ el.second }}</p>
       </template>
     </profileInfoLabel>
   </section>
@@ -42,6 +44,11 @@ export default defineComponent({
       ],
     };
   },
+  methods: {
+    customEventEmit(eventName: 'onGoTo' | 'onLogout', data?: string) {
+      window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
+    }
+  }
 });
 </script>
 

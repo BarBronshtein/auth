@@ -19,7 +19,7 @@ export default defineComponent({
   name: 'profile-modal',
   data(): { data: Data[] } {
     return {
-      data: [{ icon: 'circle-user', title: 'my profile', action: 'onGoTo', location: 'personal-info' }, { icon: 'user-group', title: 'messanger', action: 'onGoTo', location: 'chats' }, { icon: 'right-from-bracket', title: 'logout', action: 'onLogout', location: '/' }]
+      data: [{ icon: 'circle-user', title: 'my profile', action: 'onGoTo', location: 'profile' }, { icon: 'user-group', title: 'messanger', action: 'onGoTo', location: 'chats' }, { icon: 'right-from-bracket', title: 'logout', action: 'onLogout', location: '/' }]
     }
   },
 
