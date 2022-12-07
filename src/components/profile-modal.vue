@@ -3,7 +3,7 @@
     <div class="modal-wrapper">
       <div v-for="label in data" :key="label.title" class="modal-item"
         :class="location === label.location.substring(1) ? 'active' : ''"
-        @click="$emit(label.action, label.title); customEventEmit(label.action, label.location)">
+        @click="$emit(label.action, label.title); customEventEmit(label.action, label.location === '/chats' ? '/chats/' : label.location)">
         <span :class="`fa-solid fa-${label.icon}`"></span>
         <span class="title">{{ label.title }}</span>
       </div>
@@ -27,7 +27,7 @@ export default defineComponent({
     location() {
       const splits = window.location.href.split('/');
       if (splits.at(-2) === 'chats') return 'chats'
-      if (splits.at(-1) === 'personal-info' || splits.at(-1) === 'personal-info-edit' || splits.at(-1) === 'profile-edit') return 'profile'
+      if (splits.at(-1) === 'personal-info' || splits.at(-1) === 'edit' || splits.at(-1) === 'profile-edit') return 'profile'
       return splits.at(-1);
     }
   },
