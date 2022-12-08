@@ -1,7 +1,7 @@
 <template>
   <main class="personal-info-edit">
     <router-link to="/personal-info">
-      <span class="fa-solid fa-al"></span> Back
+      <span @click="customEventEmit('onGoTo', '/personal-info')" class="fa-solid fa-al go-back"></span> Back
     </router-link>
     <editForm :user=userToChange :originalEmail=user?.email @onUpdateUser="update" />
   </main>
@@ -22,7 +22,7 @@ export default defineComponent({
     ...mapActions(useUserStore, ['updateUser']),
     async update(user: User) {
       await this.updateUser(user);
-      this.$router?.push('/personal-info') ?? this.customEventEmit('onGoTo', '/profile');
+      this.$router?.push('/personal-info') ?? this.customEventEmit('onGoTo', '/personal-info');
     },
     customEventEmit(eventName: 'onGoTo' | 'onLogout', data?: string) {
       window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
@@ -37,7 +37,7 @@ export default defineComponent({
 
   },
   created() {
-    if (!this.user) this.$router.push('/');
+    if (!this.user) this.$router?.push('/') ?? this.customEventEmit('onGoTo', '/');
   },
   unmounted() { }
 })

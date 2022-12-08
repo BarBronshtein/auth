@@ -1,5 +1,5 @@
 <template>
-  <form v-if="user" class="edit-form" @submit="formSubmit">
+  <form v-if="user" class="edit-form" @submit.prevent="formSubmit">
     <h2>Change Info</h2>
     <p>Changes will be reflected every services</p>
     <div class="photo-input">

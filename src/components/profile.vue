@@ -8,7 +8,7 @@
         </div>
       </template>
       <template #second><button
-          @click="$router?.push('/personal-info/edit') ?? customEventEmit('onGoTo', '/profile-edit')"
+          @click="$router?.push('/personal-info/edit') ?? customEventEmit('onGoTo', '/personal-info/edit')"
           class="btn">Edit</button></template>
     </profileInfoLabel>
     <profileInfoLabel class="border-top" v-for="(el, i) in data" :key="el.first">
