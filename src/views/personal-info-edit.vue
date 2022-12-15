@@ -1,7 +1,9 @@
 <template>
   <main class="personal-info-edit">
     <router-link to="/personal-info">
-      <span @click="customEventEmit('onGoTo', '/personal-info')" class="fa-solid fa-al go-back"></span> Back
+      <div @click="customEventEmit('onGoTo', '/personal-info')" class="go-back flex">
+        <span class="fa-solid fa-al"></span> Back
+      </div>
     </router-link>
     <editForm :user=userToChange :originalEmail=user?.email @onUpdateUser="update" />
   </main>

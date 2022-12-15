@@ -27,7 +27,7 @@ export default defineComponent({
     location() {
       const splits = window.location.href.split('/');
       if (splits.at(-2) === 'chats') return 'chats'
-      if (splits.at(-1) === 'personal-info' || splits.at(-1) === 'edit') return 'profile'
+      if (splits.at(-1) === 'personal-info' || splits.at(-1) === 'edit') return 'personal-info'
       return splits.at(-1);
     }
   },

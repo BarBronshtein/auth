@@ -1,6 +1,8 @@
 .personal-info-edit {
 	a:first-of-type,
 	.go-back {
+		width: fit-content;
+		cursor: pointer;
 		color: #2d9cdb;
 		margin-bottom: 1.5rem;
 		display: block;
