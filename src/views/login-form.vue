@@ -8,7 +8,7 @@
         <h2>Sign up to see photos and videos from your friends.</h2>
       </div>
       <form class="form" @submit.prevent="formSubmit">
-        <h4 v-if="signup" style="color:red;margin-bottom:1rem;min-height: 3rem;">{{ userMsg }}</h4>
+        <h4 style="color:red;margin-bottom:1rem;min-height: 3rem;">{{ userMsg }}</h4>
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
           <input @blur="
@@ -68,6 +68,9 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(useUserStore, { toSignup: "signup", toLogin: 'login' }),
+    customEventEmit(eventName: 'onGoTo' | 'onLogout', data?: string) {
+      window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
+    },
     addClass(el: HTMLInputElement, addClass: string, removeClass: string) {
       el.classList.add(addClass);
       el.classList.remove(removeClass);
@@ -97,7 +100,8 @@ export default defineComponent({
           await this.toSignup(this.credentials);
         } else await this.toLogin(this.credentials);
         this.resetFields();
-        this.$router?.push('/personal-info')
+        this.$router?.push('/personal-info') ?? this.customEventEmit('onGoTo', '/chats')
+
       } catch (err) {
         console.log(err);
         this.userMsg = err as string;
