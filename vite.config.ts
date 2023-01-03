@@ -20,7 +20,7 @@ export default defineConfig({
 		}),
 	],
 	build: {
-		outDir: '../auth-app-backend/dist/public',
+		outDir: './build',
 		emptyOutDir: true,
 	},
 	resolve: {
