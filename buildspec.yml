@@ -1,15 +1,18 @@
 version: 0.2
 
 phases:
- pre_build:
+ install:
   commands:
-   - npm install
+   - npm ci
+
+  pre_build:
+   commands:
+    - aws s3 rm s3://auth-app-front --recursive
  build:
   commands:
    - npm run build
 
 artifacts:
  files:
-  - '**/*'
- discard-paths: no
- base-directory: build
+  - build/**/*
+ discard-paths: yes
