@@ -1,9 +1,9 @@
 version: 0.2
 
 phases:
- install:
+ pre_build:
   commands:
-   - npm ci
+   - npm install
  build:
   commands:
    - npm run build
@@ -11,6 +11,5 @@ phases:
 artifacts:
  files:
   - '**/*'
-
-discard-paths: yes
-root-directory: build
+ discard-paths: no
+ base-directory: build
