@@ -4,9 +4,7 @@ const axios = Axios.create({
 	withCredentials: true,
 });
 
-const BASE_URL = import.meta.env.PROD
-	? import.meta.env.VITE_API_PROD
-	: 'http://194.233.167.205/api/';
+const BASE_URL = 'http://194.233.167.205/api/';
 
 export const httpService = {
 	get(endpoint: string, data?: unknown) {
