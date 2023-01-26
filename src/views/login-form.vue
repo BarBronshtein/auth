@@ -28,7 +28,7 @@ isEmailOccupied();
             placeholder="Full Name" autocomplete="name" />
         </div>
         <!-- TODO: Make action-btn a component -->
-        <button class="action-btn">{{ signup ? "Sign Up" : "Login" }}</button>
+        <button class="action-btn">{{ signup? "Sign Up": "Login" }}</button>
       </form>
       <small class="text-center">or continue with these social profile</small>
       <div class="social-icons flex">
@@ -36,11 +36,11 @@ isEmailOccupied();
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
-      <small class="text-center">{{ signup ? "Already a member" : "Dont have an account yet" }}?
+      <small class="text-center">{{ signup? "Already a member": "Dont have an account yet" }}?
         <small class="active" @click="
   signup = !signup;
 resetFields();
-        ">{{ signup ? "Login" : "Register" }}</small></small>
+        ">{{ signup? "Login": "Register" }}</small></small>
     </div>
   </div>
 </template>

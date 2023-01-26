@@ -5,8 +5,8 @@ const axios = Axios.create({
 });
 
 const BASE_URL = import.meta.env.PROD
-	? import.meta.env.VITE_API_PROD_REMOTE
-	: import.meta.env.VITE_API_DEV;
+	? import.meta.env.VITE_API_PROD
+	: 'http://localhost/api/';
 
 export const httpService = {
 	get(endpoint: string, data?: unknown) {
