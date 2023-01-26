@@ -15,4 +15,3 @@ phases:
 artifacts:
  files:
   - build/**/*
- discard-paths: yes
