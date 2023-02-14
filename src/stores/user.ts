@@ -55,6 +55,15 @@ export const useUserStore = defineStore('user', {
 				throw new Error('Failed to update account please try again later');
 			}
 		},
+		async googleLogin(credentials: User) {
+			try {
+				const user = await authService.googleLogin(credentials);
+				this.setUser(user);
+			} catch (err) {
+				console.log(err);
+				throw new Error('Failed to update account please try again later');
+			}
+		},
 		setUser(user: User | null) {
 			this.user = user;
 		},

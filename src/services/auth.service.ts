@@ -7,6 +7,7 @@ export const authService = {
 	signup,
 	logout,
 	getLoggedinUser,
+	googleLogin,
 	findEmail,
 	saveToSession,
 };
@@ -30,6 +31,16 @@ async function signup(signUpInfo: User) {
 		return saveToSession(res);
 		// const res = await userService.addUser(signUpInfo);
 		// return saveToSession(res as User);
+	} catch (err) {
+		console.log(err);
+		throw new Error('Failed to signup try again later');
+	}
+}
+
+async function googleLogin(user: User) {
+	try {
+		const res = await httpService.post('auth/googleLogin', user);
+		return saveToSession(res);
 	} catch (err) {
 		console.log(err);
 		throw new Error('Failed to signup try again later');

@@ -2,10 +2,10 @@
   <div class="login-form" :class="signup ? 'signup' : ''">
     <div class="form-wrapper">
       <div class="logo">
-        <img src="https://www.instagram.com/static/images/web/logged_out_wordmark-2x.png/d2529dbef8ed.png" alt="" />
+        <img class="img-logo" src="../assets/imgs/ChattyHub.logo.png" alt="" />
       </div>
       <div class="form-header">
-        <h2>Sign up to see photos and videos from your friends.</h2>
+        <h2>Sign up to chat and see photos and videos from your friends.</h2>
       </div>
       <form class="form" @submit.prevent="formSubmit">
         <h4 style="color:red;margin-bottom:1rem;min-height: 3rem;">{{ userMsg }}</h4>
@@ -32,7 +32,10 @@ isEmailOccupied();
       </form>
       <small class="text-center">or continue with these social profile</small>
       <div class="social-icons flex">
-        <button class="social-btn" v-for="icon in icons" :key="icon">
+        <button class="social-btn" style="position:relative" v-for="icon in icons" :key="icon"
+          :title="icon !== 'google' ? 'Coming soon...' : ''">
+          <button v-if="icon === 'google'" type="button" id="google"
+            style="opacity:0;position:absolute;width:100%;height:100%;" class="hidden-button" />
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
@@ -50,12 +53,22 @@ import { defineComponent } from "vue";
 import { userService } from "@/services/user.service";
 import { useUserStore } from "@/stores/user";
 import { mapActions, mapState } from "pinia";
+import jwt_decode from 'jwt-decode'
+
 export default defineComponent({
   name: "login-form",
   components: {},
   created() {
+    google.accounts.id.initialize({
+      client_id: import.meta.env.VITE_CLIENT_ID,
+      callback: this.handleCallbackResponse
+    })
+
     // If user is alraedy logged routes you to personal-info  page
     if (this.user) this.$router?.push('/personal-info')
+  },
+  mounted() {
+    google.accounts.id.renderButton(document.querySelector('.hidden-button'), { theme: 'outline', size: 'small' })
   },
   data() {
     return {
@@ -67,7 +80,7 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapActions(useUserStore, { toSignup: "signup", toLogin: 'login' }),
+    ...mapActions(useUserStore, { toSignup: "signup", toLogin: 'login', googleLogin: 'googleLogin' }),
     customEventEmit(eventName: 'onGoTo' | 'onLogout', data?: string) {
       window.dispatchEvent(new CustomEvent(eventName, { detail: data }));
     },
@@ -131,6 +144,18 @@ export default defineComponent({
       elPass.classList.remove("correct", "incorrect");
       elEmail.classList.remove("correct", "incorrect");
     },
+    async handleCallbackResponse(response: any) {
+      const googleUser: any = jwt_decode(response.credential)
+      const user: { email: string; fullname: string; photo?: string; password: string; googleId: string } = { email: googleUser.email, fullname: googleUser.name, photo: googleUser.picture, password: '', googleId: googleUser.sub }
+      try {
+
+        await this.googleLogin(user)
+        this.$router?.push('/personal-info') ?? this.customEventEmit('onGoTo', '/chats')
+      } catch (err) {
+        console.log(err)
+        this.userMsg = err as string;
+      }
+    }
   },
   computed: {
     emailValidation() {

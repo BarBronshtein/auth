@@ -9,16 +9,24 @@
 }
 .form-wrapper {
 	.logo {
+		img {
+			width: 150px;
+		}
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		margin-bottom: 2rem;
 	}
 	.form-header {
+		text-align: center;
 		h2 {
-			font-size: 1.5rem;
-			margin-bottom: 2rem;
+			font-size: 1.35rem;
 		}
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 	}
-
+	form.form {
+		padding-inline: 1rem;
+	}
 	.input-group {
 		margin-bottom: 0.875rem;
 		position: relative;
@@ -92,5 +100,14 @@
 		border-radius: 1.5rem;
 		outline: 1px solid #bdbdbd;
 		padding: 2rem;
+		.form-header {
+			h2 {
+				font-size: 1.75rem;
+			}
+			margin-bottom: 2rem;
+		}
+		form.form {
+			padding-inline: 0;
+		}
 	}
 }

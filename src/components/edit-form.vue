@@ -32,13 +32,13 @@
       <label>Phone</label>
       <input v-model="user.phone" type="tel" placeholder="Enter your phone...">
     </div>
-    <div class="input-group">
+    <div v-if="!user.googleId" class="input-group">
       <label>Email</label>
       <input @blur="validateForm();
       isEmailOccupied();" ref="email" v-model="user.email" type="email" :pattern="emailValidation"
         placeholder="Enter your name..." required autocomplete="username">
     </div>
-    <div class="input-group">
+    <div v-if="!user.googleId" class="input-group">
       <label>Password</label>
       <input @blur="validateForm" ref="password" type="password" v-model="user.password" minlength="6"
         placeholder="Enter your password..." required autocomplete="current-password">
@@ -56,7 +56,7 @@ export default defineComponent({
   name: 'edit-form',
   props: {
     user: {
-      type: Object as PropType<User>
+      type: Object as PropType<User & { googleId: string }>
     },
     originalEmail: { type: String }
   },
