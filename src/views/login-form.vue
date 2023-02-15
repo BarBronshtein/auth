@@ -59,10 +59,12 @@ export default defineComponent({
   name: "login-form",
   components: {},
   created() {
-    google.accounts.id.initialize({
-      client_id: import.meta.env.VITE_CLIENT_ID,
-      callback: this.handleCallbackResponse
-    })
+    if (!google) setTimeout(() => {
+      google.accounts.id.initialize({
+        client_id: import.meta.env.VITE_CLIENT_ID,
+        callback: this.handleCallbackResponse
+      })
+    }, 700)
 
     // If user is alraedy logged routes you to personal-info  page
     if (this.user) this.$router?.push('/personal-info')
