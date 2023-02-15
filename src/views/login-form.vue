@@ -64,12 +64,16 @@ export default defineComponent({
         client_id: import.meta.env.VITE_CLIENT_ID,
         callback: this.handleCallbackResponse
       })
-    }, 700)
-
+    }, 600)
+    google?.accounts?.id?.initialize({
+      client_id: import.meta.env.VITE_CLIENT_ID,
+      callback: this.handleCallbackResponse
+    })
     // If user is alraedy logged routes you to personal-info  page
     if (this.user) this.$router?.push('/personal-info')
   },
   mounted() {
+    if (!google) setTimeout(() => { google.accounts.id.renderButton(document.querySelector('.hidden-button'), { theme: 'outline', size: 'small' }) }, 500)
     google.accounts.id.renderButton(document.querySelector('.hidden-button'), { theme: 'outline', size: 'small' })
   },
   data() {
