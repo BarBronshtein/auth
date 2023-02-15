@@ -20,10 +20,6 @@ export default defineConfig({
 			},
 		}),
 	],
-	build: {
-		outDir: './build',
-		emptyOutDir: true,
-	},
 	resolve: {
 		alias: {
 			'@': fileURLToPath(new URL('./src', import.meta.url)),
