@@ -12,15 +12,15 @@
         <div class="input-group">
           <span class="fa-solid fa-email"></span>
           <input @blur="
-  validateForm();
-isEmailOccupied();
-          " ref="email" v-model="credentials.email" type="email" placeholder="Email" required
+            validateForm();
+          isEmailOccupied();
+                      " ref="email" v-model="credentials.email" type="email" placeholder="Email" required
             :pattern="emailValidation" autocomplete="username" />
         </div>
         <div class="input-group">
           <span class="fa-solid fa-lock"></span>
-          <input @blur="validateForm" ref="password" v-model="credentials.password" type="password"
-            placeholder="Password" minlength="6" required autocomplete="current-password" />
+          <input @blur="validateForm" ref="password" v-model="credentials.password" type="password" placeholder="Password"
+            minlength="6" required autocomplete="current-password" />
         </div>
         <div v-if="signup" class="input-group">
           <span class="fa-solid fa-user"></span>
@@ -28,9 +28,9 @@ isEmailOccupied();
             placeholder="Full Name" autocomplete="name" />
         </div>
         <!-- TODO: Make action-btn a component -->
-        <button class="action-btn">{{ signup? "Sign Up": "Login" }}</button>
+        <button class="action-btn">{{ signup ? "Sign Up" : "Login" }}</button>
       </form>
-      <small class="text-center">or continue with these social profile</small>
+      <small class="text-center">or continue with these social profiles</small>
       <div class="social-icons flex">
         <button class="social-btn" style="position:relative" v-for="icon in icons" :key="icon"
           :title="icon !== 'google' ? 'Coming soon...' : ''">
@@ -39,11 +39,11 @@ isEmailOccupied();
           <i :class="`fa-brands fa-${icon}`"></i>
         </button>
       </div>
-      <small class="text-center">{{ signup? "Already a member": "Dont have an account yet" }}?
+      <small class="text-center">{{ signup ? "Already a member" : "Dont have an account yet" }}?
         <small class="active" @click="
-  signup = !signup;
-resetFields();
-        ">{{ signup? "Login": "Register" }}</small></small>
+          signup = !signup;
+        resetFields();
+                  ">{{ signup ? "Login" : "Register" }}</small></small>
     </div>
   </div>
 </template>
@@ -172,6 +172,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
