@@ -14,8 +14,8 @@
           <input @blur="
             validateForm();
           isEmailOccupied();
-                      " ref="email" v-model="credentials.email" type="email" placeholder="Email" required
-            :pattern="emailValidation" autocomplete="username" />
+                                                                      " ref="email" v-model="credentials.email" type="email"
+            placeholder="Email" required :pattern="emailValidation" autocomplete="username" />
         </div>
         <div class="input-group">
           <span class="fa-solid fa-lock"></span>
@@ -43,7 +43,7 @@
         <small class="active" @click="
           signup = !signup;
         resetFields();
-                  ">{{ signup ? "Login" : "Register" }}</small></small>
+                                                          ">{{ signup ? "Login" : "Register" }}</small></small>
     </div>
   </div>
 </template>
@@ -57,7 +57,6 @@ import jwt_decode from 'jwt-decode'
 
 export default defineComponent({
   name: "login-form",
-  components: {},
   created() {
     if (!google) setTimeout(() => {
       google.accounts.id.initialize({
@@ -70,11 +69,11 @@ export default defineComponent({
       callback: this.handleCallbackResponse
     })
     // If user is alraedy logged routes you to personal-info  page
-    if (this.user) this.$router?.push('/personal-info')
+    if (this.user) this.$router?.push('/personal-info') ?? this.customEventEmit('onGoTo', '/chats')
   },
   mounted() {
     if (!google) setTimeout(() => { google.accounts.id.renderButton(document.querySelector('.hidden-button'), { theme: 'outline', size: 'small' }) }, 500)
-    google.accounts.id.renderButton(document.querySelector('.hidden-button'), { theme: 'outline', size: 'small' })
+    google?.accounts?.id?.renderButton(document.querySelector('.hidden-button'), { theme: 'outline', size: 'small' })
   },
   data() {
     return {

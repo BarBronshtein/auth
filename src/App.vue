@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import appHeader from '@/components/app-header.vue';
-import { RouterView } from 'vue-router';
+import appHeader from "@/components/app-header.vue";
+import { RouterView } from "vue-router";
 </script>
 
 <template>
@@ -8,6 +8,4 @@ import { RouterView } from 'vue-router';
   <RouterView class="main-layout" />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
