@@ -6,7 +6,24 @@ export const utilService = {
 	debounce,
 	timeAgo,
 	makeRandNum,
+	waitVarToLoad,
+	renderGoogleButton,
+	initializeGoogle,
 };
+
+function initializeGoogle(callback: Function) {
+	google?.accounts?.id?.initialize({
+		client_id: import.meta.env.VITE_CLIENT_ID,
+		callback,
+	});
+}
+
+function renderGoogleButton() {
+	google.accounts?.id?.renderButton(document.querySelector('.hidden-button'), {
+		theme: 'outline',
+		size: 'small',
+	});
+}
 
 function makeRandNum() {
 	return Math.trunc(Date.now() % 100);
@@ -137,4 +154,9 @@ export function insertionSort<T>(
 
 function swap(arr: any[], i: number, j: number) {
 	[arr[i], arr[j]] = [arr[j], arr[i]];
+}
+
+function waitVarToLoad(callback: Function) {
+	if (google) return callback();
+	else setTimeout(waitVarToLoad, 500);
 }
